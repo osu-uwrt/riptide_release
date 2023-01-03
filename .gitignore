@@ -1,4 +1,4 @@
-devel/
+install/
 logs/
 build/
 bin/
@@ -49,3 +49,5 @@ qtcreator-*
 
 # Catkin custom files
 COLCON_IGNORE
+
+Dockerfile

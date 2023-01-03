@@ -31,26 +31,9 @@
                 "-DPython3_EXECUTABLE=/usr/bin/python3"
             ]
         },
-        "micro_xrce_dds_agent": {
+        "fastrtps": {
             "cmake-args": [
-                "-DCMAKE_CXX_COMPILER:FILEPATH=${CMAKE_CXX_COMPILER}",
-                "-DCMAKE_C_COMPILER:FILEPATH=${CMAKE_C_COMPILER}",
-                "-DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE}",
-                "-DCMAKE_C_FLAGS:STRING=${CMAKE_C_FLAGS}",
-                "-DCMAKE_CXX_FLAGS:STRING=${CMAKE_CXX_FLAGS}",
-                "-DCMAKE_EXE_LINKER_FLAGS:STRING=${CMAKE_EXE_LINKER_FLAGS}",
-                "-DCMAKE_SHARED_LINKER_FLAGS:STRING=${CMAKE_SHARED_LINKER_FLAGS}",
-                "-DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>",
-                "-DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE}",
-                "-DCMAKE_PREFIX_PATH:PATH=<INSTALL_DIR>",
-                "-DCMAKE_SYSTEM_NAME:STRING=${CMAKE_SYSTEM_NAME}",
-                "-DUAGENT_USE_SYSTEM_FASTDDS:BOOL=ON",
-                "-DUAGENT_USE_SYSTEM_FASTCDR:BOOL=ON",
-                "-DUAGENT_USE_SYSTEM_LOGGER:BOOL=${UAGENT_USE_SYSTEM_LOGGER}",
-                "-DUAGENT_CED_PROFILE:BOOL=OFF",
-                "-DUAGENT_P2P_PROFILE:BOOL=OFF",
-                "-DUAGENT_BUILD_EXECUTABLE:BOOL=OFF",
-                "-DUAGENT_ISOLATED_INSTALL:BOOL=OFF"
+                "-DCOMPILE_TOOLS=OFF"
             ]
         },
         "micro_ros_agent": {
