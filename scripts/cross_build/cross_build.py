@@ -299,6 +299,7 @@ def build_sources(settings: dict):
     exitCode, _ = execute(dockerCmd, True)
     if(exitCode != 0):
         print("Docker build failure, see output logs for more information")
+        exit(-7)
 
 def make_archive(settings: dict):
     # grab the working directory
