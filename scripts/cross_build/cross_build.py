@@ -47,6 +47,9 @@ fi
 
 cd /ros_build
 
+export ROS_VERSION=2
+export ROS_DISTRO={2}
+
 # run rosdep to make sure things look okay package wise
 rosdep update
 rosdep install --from-paths src --ignore-src -y --skip-keys "fastcdr rti-connext-dds-6.0.1 urdfdom_headers"
@@ -61,6 +64,12 @@ rosdep install --from-paths src --ignore-src -y --skip-keys "fastcdr rti-connext
 # this build forces a full clean configure and rebuild of all packages. this should make everything relatively compliant assuming
 # the current repos remain buildable (failure https://github.com/micro-ROS/micro-ROS-Agent.gits do make it into release sometimes...)
 colcon build --merge-install --metas /l4t/toolchain/aarch64-buildroot-linux-gnu/sysroot/home/meta.meta {1}
+
+# check that colcon ran okay
+if [[ $? -ne 0 ]]; then
+    echo "failed to build one or more packages"
+    exit -2
+fi
 
 """
 # --event-handlers console_direct+
@@ -256,8 +265,15 @@ def build_sources(settings: dict):
     if(settings["tgt_pkg"] != ""):
         tgtPkgArg = "--packages-up-to " + settings["tgt_pkg"]
 
+    splitMeta = settings["meta_name"].split("_")
+    if(len(splitMeta) < 2):
+        print("Error: Meta name invalid. expected at least <distro>_<info>")
+        exit(-6)
+    
+    distroName = splitMeta[0]
+
     # Format the build script template
-    build_script = BUILD_SCRIPT_TEMPLATE.format(cleanCmd, tgtPkgArg)
+    build_script = BUILD_SCRIPT_TEMPLATE.format(cleanCmd, tgtPkgArg, distroName)
 
     # write the build script file
     scriptFile = os.path.join(workDir, "build.bash")
