@@ -59,11 +59,33 @@ rosdep install --from-paths src --ignore-src -y --skip-keys "fastcdr rti-connext
 # for rclpy: missing python3 and issues with pybind11 https://github.com/ros2/rclpy/issues/920
 # for tf2_py, tf2_geometry_msgs, rosbag2_py missing python3 
 
+# need to build XRCE agent first to allow offline fully replicable builds
+# see https://github.com/micro-ROS/micro-ROS-Agent/issues/161 
+if grep -q micro_ros_agent "./meta.repos"; then
+    # make sure the xrce agent is in the 
+    if colcon list | grep -q microxrcedds_agent; then
+        echo "Detected build of Micro ROS Agent. Building XRCE Agent first!"
+
+        colcon build --merge-install --metas ./meta.meta --packages-up-to microxrcedds_agent
+
+        # check that colcon ran okay
+        if [[ $? -ne 0 ]]; then
+            echo "failed to build one or more packages"
+            exit -2
+        fi
+
+        source ./install/setup.bash
+    else
+        echo "Failed to detect XRCE agent when asked to build Micro ROS Agent, build will now halt"
+        exit -3
+    fi
+fi
+
 {0}
 
 # this build forces a full clean configure and rebuild of all packages. this should make everything relatively compliant assuming
 # the current repos remain buildable (failure https://github.com/micro-ROS/micro-ROS-Agent.gits do make it into release sometimes...)
-colcon build --merge-install --metas /l4t/toolchain/aarch64-buildroot-linux-gnu/sysroot/home/meta.meta {1}
+colcon build --merge-install --metas ./meta.meta {1}
 
 # check that colcon ran okay
 if [[ $? -ne 0 ]]; then

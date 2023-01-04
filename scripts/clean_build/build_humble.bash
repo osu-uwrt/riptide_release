@@ -1,5 +1,11 @@
 #!/bin/bash
 
+echo "This build method is deprecated, DO NOT USE"
+echo "It was not designed to work with riptide 2.0 repositories"
+echo "Use the system created in cross_build instead"
+
+sleep 10
+
 # set some environment variables for what we are about to build
 export ROS_DISTRO="humble"
 REPO_FILE_NAME="${ROS_DISTRO}_base_jetson"
