@@ -93,6 +93,8 @@ if [[ $? -ne 0 ]]; then
     exit -2
 fi
 
+{2}
+
 """
 # --event-handlers console_direct+
 # -DCMAKE_VERBOSE_MAKEFILE=ON
@@ -226,7 +228,7 @@ def checkout_sources(settings: dict):
     # print(f"New Hash: {new_hash}")
         
     # check that we have an old hash and that it matches
-    if(old_hash != "" and old_hash == new_hash):
+    if(not settings["clean"] and old_hash != "" and old_hash == new_hash):
         print("Meta source definition files have not changed, skipping checkout")
         
     # either the old hash isnt there, or they dont match
@@ -327,19 +329,35 @@ def make_archive(settings: dict):
     # grab the working directory
     workDir = settings["cross_dir"]
 
-    print("Owning build archive")
-    userPass = getpass.getpass(prompt="Enter your password to re-own the build archive: ")
+    print("Preparing to make build archive")
 
     # need to own the work directory first
-    execute(["chown", "-R", USER_NAME, workDir], sudo=True, userPass=userPass)
+    exitCode = 1
+    while exitCode != 0:
+        userPass = getpass.getpass(prompt="Enter your password to re-own the build archive: ")
+
+        print("Owning build archive")
+        exitCode, _ = execute(["chown", "-R", USER_NAME, workDir], sudo=True, userPass=userPass)
+
+        if(exitCode != 0):
+            print("Failed to authenticate")
 
     archiveFile = os.path.join(USER_HOME, "osu-uwrt", settings["meta_name"] + "_built.tar.gz")
 
     # now we can create the archive tarball
     print("Creating archive of build results. This may take a few minutes")
-    with tarfile.open(archiveFile, mode="w:gz") as archive:
-        archive.add(workDir, arcname="./" + settings["meta_name"] + "_built")
-        # archive.list()
+    # detect if the system has tar command with gzip
+    exitCode, _ = execute(["tar", "-?"])
+    if(exitCode != 0):
+        # tar command not working
+        with tarfile.open(archiveFile, mode="w:gz") as archive:
+            archive.add(workDir, arcname="./" + settings["meta_name"] + "_built")
+            # archive.list()
+
+    else:
+        # use tar command
+        archLoc = os.path.join(USER_HOME, "osu-uwrt")
+        exitCode, _ = execute(['tar', '-czf', archiveFile, "./jetson_install"], cwd=archLoc)
 
     print("Archive complete!")
 
@@ -432,10 +450,10 @@ def execute(fullCmd, printOut=False, sudo=False, userPass="", cwd=None):
     if printOut: print(fullCmd)
     stdoutText = []
 
-    proc = Popen(fullCmd, stdout=PIPE, stderr=STDOUT, universal_newlines=True, cwd=cwd)
+    proc = Popen(fullCmd, stdout=PIPE, stdin=PIPE, stderr=STDOUT, universal_newlines=True, cwd=cwd)
 
     if(sudo):
-        stdoutText, _ = proc.communicate(userPass + "\n")
+        stdoutText = proc.communicate(userPass + "\n")[1]
         if printOut: print(stdoutText)
 
     else:

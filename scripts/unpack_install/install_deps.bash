@@ -23,8 +23,6 @@ if [[ ! -f "$UPDATE_BLOCK_FILE" || ! -z $1 ]]; then
     python3-setuptools python3-vcstool wget bison flex ccache clang lld llvm libc++-dev libc++abi-dev libacl1-dev \
     libpython3-dev python3-dev python-is-python3 libboost-python-dev pv
 
-    # addtl deps
-
     # update mixins
     colcon mixin add default https://raw.githubusercontent.com/colcon/colcon-mixin-repository/master/index.yaml
     colcon mixin update default
