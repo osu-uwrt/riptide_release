@@ -127,6 +127,7 @@ if __name__ == "__main__":
     makeRemoteDir(REM_BSE_DIR, args.username, args.address)
     print("    DONE")
 
+    ROS_TAR = None
     TARS = glob(os.path.join(BASE_DIR, f"{ROS_DISTRO}*.tar.gz"))
     if len(TARS) > 0:
         ROS_TAR = querySelection(TARS)
@@ -147,7 +148,7 @@ if __name__ == "__main__":
     print("    OK ")
 
     print("\nSynchronizing clocks between host and target:")
-    scriptRun = os.path.join("config_target", "date_set.bash")
+    scriptRun = os.path.join("scripts", "config_target", "date_set.bash")
     execLocalScript(scriptRun, [args.address, args.username])
     print("    DONE")
 
@@ -179,10 +180,13 @@ if __name__ == "__main__":
     print("    DONE")
 
     print("\nInstalling ROS on the target:")
-    REM_TAR = os.path.join(REM_BSE_DIR, ROS_TAR[ROS_TAR.rindex('/') + 1: ])
-    print(f"Using remote tar file {REM_TAR}")
-    scriptRun = os.path.join(REM_SCRIPT_DIR, "unpack_install", f"install_tar.bash {ROS_DISTRO} {REM_TAR}")
-    runRemoteCmd(scriptRun, args.username, args.address)
+    if(ROS_TAR):
+        REM_TAR = os.path.join(REM_BSE_DIR, ROS_TAR[ROS_TAR.rindex('/') + 1: ])
+        print(f"Using remote tar file {REM_TAR}")
+        scriptRun = os.path.join(REM_SCRIPT_DIR, "unpack_install", f"install_tar.bash {ROS_DISTRO} {REM_TAR}")
+        runRemoteCmd(scriptRun, args.username, args.address)
+    else:
+        print("Skipping remote tar install as one was not found locally")
 
     print("\nSetting up .bashrc")
     scriptRun = os.path.join(REM_SCRIPT_DIR, "unpack_install", "setup_bashrc.bash")

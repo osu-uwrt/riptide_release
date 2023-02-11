@@ -93,8 +93,6 @@ if [[ $? -ne 0 ]]; then
     exit -2
 fi
 
-{2}
-
 """
 # --event-handlers console_direct+
 # -DCMAKE_VERBOSE_MAKEFILE=ON
