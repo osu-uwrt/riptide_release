@@ -1,151 +1,43 @@
-import os
+#!/bin/python3
+
+import os, yaml, getpass, glob, argparse, time
 from posixpath import expanduser
-from getpass import getpass
 from fabric import Connection, Config
 from subprocess import Popen, PIPE, CalledProcessError, call
-from glob import glob
-import argparse
-import time
 
-# version of call that pipes stdout back
-def execute(fullCmd, printOut=False):
-    if printOut: print(fullCmd)
-    proc = Popen(fullCmd, stdout=PIPE, stderr=PIPE, universal_newlines=True)
-    if printOut:
-        for line in iter(proc.stdout.readline, ""):
-            print(line)
-        for errLine in iter(proc.stderr.readline, ""):
-            print(f"ERROR: {errLine}")
-    proc.stdout.close()
-    retCode = proc.wait()
-    if retCode:
-        raise CalledProcessError(retCode, fullCmd)
+HOME_DIR = expanduser("~")
+BASE_DIR = os.path.join(HOME_DIR, "osu-uwrt", "release", "scripts")
+ROS_DISTRO = "humble"
 
-def remoteExecResult(cmd, username, address, printOut=False, root=False, passwd=""):
-    if root:
-        connect = Connection(f"{username}@{address}", config=Config(overrides={"sudo": {"password": passwd}}))
-        result = connect.sudo(cmd, hide=(not printOut))
-        return (result.exited, str(result).rsplit("\n") if result else [])
-    else:
-        connect = Connection(f"{username}@{address}")
-        result = connect.run(cmd, hide=(not printOut))
-        return (result.exited, str(result).rsplit("\n") if result else [])
-
-def remoteExec(cmd, username, address, printOut=False, root=False, passwd=""):
-    if root:
-        connect = Connection(f"{username}@{address}", config=Config(overrides={"sudo": {"password": passwd}}))
-        result = connect.sudo(cmd, hide=(not printOut))
-        return result.exited
-    else:
-        connect = Connection(f"{username}@{address}")
-        result = connect.run(cmd, hide=(not printOut))
-        return result.exited
-    
-
-def testNetwork(pingAddress):
-    if call(["ping", "-c", "1", pingAddress], stdout=open(os.devnull, 'wb')) != 0:
-        print(f"Failed to ping {pingAddress}")
-        return False
-    return True
-
-def testNetworkRemote(pingAddress, username, address):
-    if remoteExec(f"ping -c 1 {pingAddress}", username, address) != 0:
-        print(f"Failed to ping {pingAddress} on {username}@{address}")
-        return False
-    return True
-
-def execLocalScript(localPath, args):
-    scriptPath = os.path.join(os.getcwd(), localPath)
-    if not os.path.isfile(scriptPath):
-        print(f"Script {scriptPath}, does not exist")
-        exit()
-    callList = [scriptPath]
-    callList.extend(args)
-    return execute(callList, printOut=True)
-
-def makeRemoteDir(remoteDir, username, address):
-    remoteExec(f"mkdir -p {remoteDir}", username, address, False)
-
-def xferSingleFile(localFile, username, address, destination):
-    execute(["rsync", "-vzc", localFile, f"{username}@{address}:{destination}"], False)
-
-def xferDir(localdir, username, address, destination):
-    execute(["rsync", "-vrzc", "--delete", "--exclude=**/.git/", "--exclude=**/.vscode/", localdir, f"{username}@{address}:{destination}"], False)
-
-def runRemoteCmd(remoteScript, username, address):
-    remoteExec(remoteScript, username, address, True)
-
-def querySelection(inputList):
-    selection = -1
-    if(len(inputList) > 1):
-        print("Found multiple options:")
-        for i in range(len(inputList)):
-            print(f"{i + 1} {inputList[i]}")
-        while selection < 1 or selection > len(inputList):
-            selection = input("Select the option you want to use: ")
-        selection -= 1        
-    else:
-        selection = 0
-    return inputList[selection]
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Setup remote Jetson target")
-    parser.add_argument("address", type=str, help="Address of the jetson, Hostname or IP")
-    parser.add_argument("-u", "--username", type=str, help="Username to login with", default="ros", required=False)
+def main():
+    # look at argparse to see if we should use a previous config
+    parser = argparse.ArgumentParser(description="Build a ROS meta for jetson native use")
+    parser.add_argument("-p", "--prev", action="store_true", help="Use previously written config")
+    parser.add_argument("--cfg", type=str, help="config file to use when loading", default="/tmp/remote_setup_cf.yaml", required=False)
     args = parser.parse_args()
 
-    HOME_DIR = expanduser("~")
-    BASE_DIR = os.path.join(HOME_DIR, "osu-uwrt")
-    REM_BSE_DIR = os.path.join("/home", args.username, "osu-uwrt")
-    ROS_DISTRO = "humble"
-    # SCRIPT_DIR = os.path.join(BASE_DIR, "riptide_setup", "scripts", "jetson_config")
-    REM_SCRIPT_DIR = os.path.join(REM_BSE_DIR, "riptide_setup", "scripts", "jetson_config")
+    # load the settings
+    settings = {}
+    if(args.prev):
+        print("Loading prior config")
+        with open(args.cfg) as cfgFile:
+            settings = yaml.safe_load(cfgFile)
 
-    # test the connection first
-    print(f"Testing connection to {args.address}")
-    if not testNetwork(args.address):
-        exit()
-    print("    OK")
+        print("Using config settings: ")
+        print(settings)
 
-    # handle SSH keys
-    print("\nChecking for SSH keys")
-    targetPass = getpass(prompt="Enter password for remote user:\n")
-    sshkeys = glob(os.path.join(HOME_DIR, ".ssh", f"sshkey_{args.address}"))
-    if(len(sshkeys) > 0):
-        print(f"\n\nSSH key already exists for address: {args.address}")
     else:
-        print(f"\n\nConfiguring SSH Keys for {args.username}@{args.address}")
-        try:
-            execLocalScript(os.path.join("config_host", "relationship.bash"), [args.address, args.username])
-        except CalledProcessError as e:
-            if e.returncode != 0 and e.returncode != 1:
-                exit()
-    print("    DONE")
-        
-    # make the remote directory
-    print(f"\nCreating {REM_BSE_DIR} on target")
-    makeRemoteDir(REM_BSE_DIR, args.username, args.address)
-    print("    DONE")
+        # get the configuration for what we are about to do
+        settings = config_menu()
+        print("Writing configuration details")
 
-    ROS_TAR = None
-    TARS = glob(os.path.join(BASE_DIR, f"{ROS_DISTRO}*.tar.gz"))
-    if len(TARS) > 0:
-        ROS_TAR = querySelection(TARS)
-        print(f"\nTransferring binary {ROS_TAR} to target, this may take a minute:")
-        xferSingleFile(ROS_TAR, args.username, args.address, REM_BSE_DIR)
-        print("    DONE")
-    else:
-        print("Skipping tarball transfer")
+    time.sleep(2.5)
 
-    print("\nTransferring scripts to target:")
-    riptideSetupDir = os.path.join(BASE_DIR, "riptide_setup")
-    xferDir(riptideSetupDir, args.username, args.address, REM_BSE_DIR)
-    print("    DONE")
+    # connect to the remote and check for SSH
+    connect_ssh(settings)
 
-    print("\nAllowing passwordless sudo on target:")
-    remoteExec(f'echo "{args.username} ALL=(ALL:ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/{args.username}',
-        args.username, args.address, root=True, passwd=targetPass)
-    print("    OK ")
+
+    exit()
 
     print("\nSynchronizing clocks between host and target:")
     scriptRun = os.path.join("scripts", "config_target", "date_set.bash")
@@ -198,3 +90,181 @@ if __name__ == "__main__":
     scriptRun = os.path.join(REM_SCRIPT_DIR, "unpack_install", "pytorch_install.bash")
     runRemoteCmd(scriptRun, args.username, args.address)
     print("    DONE")
+
+# sub section functions
+def config_menu():
+    confDict = {}
+
+    # scan the hosts file and ask if connecting to these
+    targets = scan_hosts()
+    print("If target does not appear in this list, add it to the /etc/hosts file")
+    targetSel = select_menu(targets, "Remote Target")
+    confDict["target_name"] = targets[targetSel]
+
+    # scan for ROS installations availiable
+    tarballs = glob.glob(os.path.join(HOME_DIR, "Downloads", f"{ROS_DISTRO}*.tar.gz"))
+    if(len(tarballs) > 0):
+        print("If the desired ROS tarball is not found place it in this user's downloads directory\n(It must be a GZipped tar archive)")
+        tarSel = select_menu(tarballs, "ROS Tarball")
+        confDict["tarball_name"] = tarballs[tarSel]
+    else:
+        print("No ROS tars found in users Downloads directory. Skipping tar install")
+        confDict["tarball_name"] = None
+
+    # query for remote login info
+    print("Enter the remote username and password")
+    confDict["username"] = input("username: ")
+    confDict["password"] = getpass.getpass("password: ")
+
+    # write the config to tmp as a yaml file
+    with open("/tmp/remote_setup_cf.yaml", "w") as file:
+        confDump = yaml.dump(confDict)
+        file.write(confDump)
+
+    return confDict
+
+
+def connect_ssh(settings: dict):
+    username = settings["username"]
+    target = settings["target_name"]
+
+    # test the connection first
+    if not testNetwork(target):
+        print(f"Failed to ping {target}. Make sure the device is online then re-run this configuration")
+        exit()
+
+    # handle SSH keys
+    sshkeys = glob.glob(os.path.join(HOME_DIR, ".ssh", f"sshkey_{target}"))
+    if(len(sshkeys) > 0):
+        print(f"\n\nFound existing SSH key for target: {target }")
+    else:
+        print(f"\n\nConfiguring SSH Keys for {username}@{target}")
+        try:
+            execLocalScript(os.path.join("config_host", "relationship.bash"), [target, username])
+        except CalledProcessError as e:
+            if e.returncode != 0 and e.returncode != 1:
+                exit()
+
+    # configure passwordless sudo on target
+    remoteExec(f'echo "{username} ALL=(ALL:ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/{username}',
+        username, target, root=True, passwd=settings["password"])
+
+    # now xfer the script dir
+    print("Transferring scripts to remote")
+    xferDir(BASE_DIR, username, target, "~")
+
+    # if we have a tarball to transfer, do so
+    if(settings["tarball_name"] != None):
+        print("Transferring ROS Tar archive, this may take a moment")
+        xferSingleFile(settings["tarball_name"], username, target, "~")
+
+    
+    
+
+##########################################################################################
+### Helper functions below this point used for hashing, user input and shell execution ###
+##########################################################################################
+
+def scan_hosts() -> list:
+    hosts = []
+    # read etc hosts
+    with open("/etc/hosts", "r") as data:
+        lines = data.readlines()
+
+        # remove commented out lines
+        filteredLines = [line.strip() for line in lines if not line.startswith("#") and line.strip() != ""]
+
+        # get the names for each host
+        for line in filteredLines:
+            hosts.append(line.split("#")[0].split()[1])
+        
+    return hosts
+
+
+# helper function for building the config menus when doing selections
+def select_menu(options: list, list_name: str) -> int:
+    print(f"Found availiable {list_name} options:")
+
+    selection = -1
+    for i in range(len(options)):
+        print(f"{i}.\t{options[i]}")
+    if(len(options) > 1):
+        selection = int(input(f"Select the {list_name} to use:\n"))
+    elif(len(options) > 0):
+        selection = 0
+        print(f"Selected {options[0]} as it was the only option")
+    print("\n")
+    return selection
+
+# version of call that pipes stdout back
+def execute(fullCmd, printOut=False):
+    if printOut: print(fullCmd)
+    proc = Popen(fullCmd, stdout=PIPE, stderr=PIPE, universal_newlines=True)
+    if printOut:
+        for line in iter(proc.stdout.readline, ""):
+            print(line)
+        for errLine in iter(proc.stderr.readline, ""):
+            print(errLine)
+    proc.stdout.close()
+    retCode = proc.wait()
+    if retCode:
+        raise CalledProcessError(retCode, fullCmd)
+
+def remoteExecResult(cmd, username, address, printOut=False, root=False, passwd=""):
+    if root:
+        connect = Connection(f"{username}@{address}", config=Config(overrides={"sudo": {"password": passwd}}))
+        result = connect.sudo(cmd, hide=(not printOut))
+        return (result.exited, str(result).rsplit("\n") if result else [])
+    else:
+        connect = Connection(f"{username}@{address}")
+        result = connect.run(cmd, hide=(not printOut))
+        return (result.exited, str(result).rsplit("\n") if result else [])
+
+def remoteExec(cmd, username, address, printOut=False, root=False, passwd=""):
+    if root:
+        connect = Connection(f"{username}@{address}", config=Config(overrides={"sudo": {"password": passwd}}))
+        result = connect.sudo(cmd, hide=(not printOut))
+        return result.exited
+    else:
+        connect = Connection(f"{username}@{address}")
+        result = connect.run(cmd, hide=(not printOut))
+        return result.exited
+    
+
+def testNetwork(pingAddress):
+    if call(["ping", "-c", "1", pingAddress], stdout=open(os.devnull, 'wb')) != 0:
+        return False
+    return True
+
+def testNetworkRemote(pingAddress, username, address):
+    if remoteExec(f"ping -c 1 {pingAddress}", username, address) != 0:
+        return False
+    return True
+
+def execLocalScript(localPath, args):
+    scriptPath = os.path.join(os.getcwd(), localPath)
+    if not os.path.isfile(scriptPath):
+        print(f"Script {scriptPath}, does not exist")
+        exit()
+    callList = [scriptPath]
+    callList.extend(args)
+    return execute(callList, printOut=True)
+
+def makeRemoteDir(remoteDir, username, address):
+    remoteExec(f"mkdir -p {remoteDir}", username, address, False)
+
+def xferSingleFile(localFile, username, address, destination):
+    execute(["rsync", "-vzc", localFile, f"{username}@{address}:{destination}"], False)
+
+def xferDir(localdir, username, address, destination):
+    execute(["rsync", "-vrzc", "--delete", "--exclude=**/.git/", "--exclude=**/.vscode/", localdir, f"{username}@{address}:{destination}"], False)
+
+def runRemoteCmd(remoteScript, username, address):
+    remoteExec(remoteScript, username, address, True)
+
+
+
+
+# main invoker
+if __name__ == "__main__":
+    main()
