@@ -14,8 +14,7 @@ export ROS_VERSION=2
 
 echo "Unpacking tar archive $ROS_TAR for install"
 
-
-cd ~/osu-uwrt
+cd ~
 
 # extract archive
 tar -xf $ROS_TAR

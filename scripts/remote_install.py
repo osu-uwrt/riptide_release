@@ -14,6 +14,7 @@ def main():
     parser = argparse.ArgumentParser(description="Build a ROS meta for jetson native use")
     parser.add_argument("-p", "--prev", action="store_true", help="Use previously written config")
     parser.add_argument("--cfg", type=str, help="config file to use when loading", default="/tmp/remote_setup_cf.yaml", required=False)
+    parser.add_argument("-s", "--skip-deps", action="store_true", help="Use previously written config")
     args = parser.parse_args()
 
     # load the settings
@@ -30,6 +31,9 @@ def main():
         # get the configuration for what we are about to do
         settings = config_menu()
         print("Writing configuration details")
+    
+    # save the ski deps setting
+    settings["skip_deps"] = args.skip_deps
 
     time.sleep(2.5)
 
@@ -134,15 +138,17 @@ def target_configuration(settings: dict):
     tarball = settings["tarball_name"]
 
     # install dependencies
-    print("\nInstalling dependencies:")
-    scriptRun = os.path.join("~", "scripts", "unpack_install", "install_deps.bash")
-    remoteExec(f"/bin/bash {scriptRun}", username, target)
+    if(not settings["skip_deps"]):
+        print("\nInstalling dependencies:")
+        scriptRun = os.path.join("~", "scripts", "unpack_install", "install_deps.bash")
+        remoteExec(f"/bin/bash {scriptRun}", username, target)
 
     # install pytorch
     print("\nInstalling PyTorch on the target:")
     scriptRun = os.path.join("~", "scripts", "unpack_install", "pytorch_install.bash")
     remoteExec(f"/bin/bash {scriptRun}", username, target)
 
+    # run the tar install
     if(tarball):
         print("Installing ROS tar")
         scriptRun = os.path.join("~", "scripts", "unpack_install", f"install_tar.bash {ROS_DISTRO} {tarball}")
