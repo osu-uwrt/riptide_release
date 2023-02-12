@@ -23,3 +23,6 @@ This is a stripped down version of ROS almost ready for vehicle use
 
 ### humble_desktop_jetson
 This is the default ros2.repos made publicly availiable on github from the `ros2` repository: https://github.com/ros2/ros2/tree/humble-release
+
+### humble_robot_jetson
+This was generated with the following rosdep command. `rosinstall_generator --rosdistro humble --format repos --deps rclcpp rclpy image_pipeline robot_localization joint_state_publisher robot_state_publisher tf_transformations behaviortree_cpp_v3 diagnostic_aggregator diagnostic_updater xacro`
