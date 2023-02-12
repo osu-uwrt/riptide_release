@@ -227,6 +227,10 @@ repositories:
     type: git
     url: https://github.com/ros2-gbp/cyclonedds-release.git
     version: release/humble/cyclonedds/0.9.1-1
+  diagnostics/diagnostic_aggregator:
+    type: git
+    url: https://github.com/ros2-gbp/diagnostics-release.git
+    version: release/humble/diagnostic_aggregator/3.1.0-2
   diagnostics/diagnostic_updater:
     type: git
     url: https://github.com/ros2-gbp/diagnostics-release.git

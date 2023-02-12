@@ -36,60 +36,13 @@ def main():
     # connect to the remote and check for SSH
     connect_ssh(settings)
 
-
-    exit()
-
-    print("\nSynchronizing clocks between host and target:")
-    scriptRun = os.path.join("scripts", "config_target", "date_set.bash")
-    execLocalScript(scriptRun, [args.address, args.username])
-    print("    DONE")
-
-    print("\nConfiguring JetPack settings on target:")
-    scriptRun = os.path.join(REM_SCRIPT_DIR, "config_target", "configure_jetpack.bash")
-    remoteExec(f"/bin/bash {scriptRun}", args.username, args.address, root=True, passwd=targetPass)
-    print("    DONE")
-        
-    print("\nTesting remote internet connection")
-    if not testNetworkRemote("google.com", args.username, args.address):
-        exit()
-    print("    OK ")
-
-    _, remoteArch = remoteExecResult("uname -m", args.username, args.address, passwd=targetPass, printOut=True)
-    if len(remoteArch) < 0 or not "aarch64" in remoteArch:
-        cont = input("The connected system is not aarch64! Continue? y/n")
-        if cont.lower() != "y" or cont.lower() != "yes":
-            print("Aborting configuration")
-            exit()
-
     print("\n\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     print("!! Preparing to invoke setup scripts on the target !!")
     print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     time.sleep(1.0)
 
-    print("\nInstalling dependencies:")
-    scriptRun = os.path.join(REM_SCRIPT_DIR, "unpack_install", "install_deps.bash")
-    runRemoteCmd(scriptRun, args.username, args.address)
-    print("    DONE")
+    target_configuration(settings)
 
-    print("\nInstalling ROS on the target:")
-    if(ROS_TAR):
-        REM_TAR = os.path.join(REM_BSE_DIR, ROS_TAR[ROS_TAR.rindex('/') + 1: ])
-        print(f"Using remote tar file {REM_TAR}")
-        scriptRun = os.path.join(REM_SCRIPT_DIR, "unpack_install", f"install_tar.bash {ROS_DISTRO} {REM_TAR}")
-        runRemoteCmd(scriptRun, args.username, args.address)
-    else:
-        print("Skipping remote tar install as one was not found locally")
-
-    print("\nSetting up .bashrc")
-    scriptRun = os.path.join(REM_SCRIPT_DIR, "unpack_install", "setup_bashrc.bash")
-    runRemoteCmd(scriptRun, args.username, args.address)
-
-    print("    DONE")
-
-    print("\nInstalling PyTorch on the target:")
-    scriptRun = os.path.join(REM_SCRIPT_DIR, "unpack_install", "pytorch_install.bash")
-    runRemoteCmd(scriptRun, args.username, args.address)
-    print("    DONE")
 
 # sub section functions
 def config_menu():
@@ -145,9 +98,26 @@ def connect_ssh(settings: dict):
             if e.returncode != 0 and e.returncode != 1:
                 exit()
 
+    # chack that the remote also has internet, this will be used to pull packages
+    if not testNetworkRemote("google.com", username, target):
+        print("Target does not have internet access. Please make sure it is connected to the internet")
+        exit()
+
     # configure passwordless sudo on target
     remoteExec(f'echo "{username} ALL=(ALL:ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/{username}',
         username, target, root=True, passwd=settings["password"])
+
+    # sync the clocks
+    scriptRun = os.path.join("config_target", "date_set.bash")
+    execLocalScript(scriptRun, [target, username])
+
+    # make sure the target is arm at least
+    _, remoteArch = remoteExecResult("uname -m", username, target, passwd=settings["password"])
+    if len(remoteArch) < 0 or not "aarch64" in remoteArch:
+        cont = input("The connected system is not aarch64! Continue? y/n")
+        if cont.lower() != "y" or cont.lower() != "yes":
+            print("Aborting configuration")
+            exit()
 
     # now xfer the script dir
     print("Transferring scripts to remote")
@@ -158,7 +128,38 @@ def connect_ssh(settings: dict):
         print("Transferring ROS Tar archive, this may take a moment")
         xferSingleFile(settings["tarball_name"], username, target, "~")
 
-    
+def target_configuration(settings: dict):
+    username = settings["username"]
+    target = settings["target_name"]
+    tarball = settings["tarball_name"]
+
+    # install dependencies
+    print("\nInstalling dependencies:")
+    scriptRun = os.path.join("~", "scripts", "unpack_install", "install_deps.bash")
+    remoteExec(f"/bin/bash {scriptRun}", username, target)
+
+    # install pytorch
+    print("\nInstalling PyTorch on the target:")
+    scriptRun = os.path.join("~", "scripts", "unpack_install", "pytorch_install.bash")
+    remoteExec(f"/bin/bash {scriptRun}", username, target)
+
+    if(tarball):
+        print("Installing ROS tar")
+        scriptRun = os.path.join("~", "scripts", "unpack_install", f"install_tar.bash {ROS_DISTRO} {tarball}")
+        remoteExec(f"/bin/bash {scriptRun}", username, target)
+    else:
+        print("Skipping remote tar install as one was not found locally")
+
+    # configure bashrc
+    print("\nSetting up .bashrc")
+    scriptRun = os.path.join("~", "scripts", "unpack_install", "setup_bashrc.bash")
+    remoteExec(f"/bin/bash {scriptRun}", username, target)
+
+    # configure JetPack settings
+    print("\nConfiguring JetPack settings on target:")
+    scriptRun = os.path.join("~", "scripts", "config_target", "configure_jetpack.bash")
+    remoteExec(f"/bin/bash {scriptRun}", username, target)
+      
     
 
 ##########################################################################################
