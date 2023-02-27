@@ -2,7 +2,7 @@
 
 # Update ~/.bashrc File
 
-s1="source ~/osu-uwrt/jetson_install/install/setup.bash"
+s1="source ~/jetson_install/install/setup.bash"
 s2="source ~/colcon_deploy/install/setup.bash"
 
 # Add appropriate lines to the bashrc if they do not exist

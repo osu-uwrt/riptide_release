@@ -21,7 +21,7 @@ tar -xf $ROS_TAR
 
 # after extraction run apt against the meta file
 echo "Installing meta deps"
-apt install -y $(cat ~/osu_uwrt/jetson_install/meta.pkgs)
+sudo apt install -y $(cat ~/osu_uwrt/jetson_install/meta.pkgs)
 if [[ $? -ne 0 ]]; then
     echo "failed to find one or more packages"
     exit -1
@@ -30,5 +30,5 @@ fi
 echo "Invoking rosdep"
 
 # run rosdep against the packages to try to resolve the rest
-cd ~/osu_uwrt/jetson_install
+cd ~/jetson_install
 rosdep install --from-paths src --ignore-src -y --skip-keys "fastcdr rti-connext-dds-6.0.1 urdfdom_headers"

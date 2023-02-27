@@ -108,8 +108,9 @@ def connect_ssh(settings: dict):
         exit()
 
     # configure passwordless sudo on target
-    remoteExec(f'echo "{username} ALL=(ALL:ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/{username}',
-        username, target, root=True, passwd=settings["password"])
+    cmd = f'/bin/sh -c \'echo "{username} ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/{username}\''
+    print(cmd)
+    remoteExec(cmd, username, target, root=True, passwd=settings["password"])
 
     # sync the clocks
     scriptRun = os.path.join("config_target", "date_set.bash")
@@ -151,7 +152,8 @@ def target_configuration(settings: dict):
     # run the tar install
     if(tarball):
         print("Installing ROS tar")
-        scriptRun = os.path.join("~", "scripts", "unpack_install", f"install_tar.bash {ROS_DISTRO} {tarball}")
+        localTarPath = "~/" + tarball.split('/')[-1]
+        scriptRun = os.path.join("~", "scripts", "unpack_install", f"install_tar.bash {ROS_DISTRO} {localTarPath}")
         remoteExec(f"/bin/bash {scriptRun}", username, target)
     else:
         print("Skipping remote tar install as one was not found locally")

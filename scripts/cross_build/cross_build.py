@@ -54,6 +54,8 @@ export ROS_DISTRO={2}
 rosdep update
 rosdep install --from-paths src --ignore-src -y --skip-keys "fastcdr rti-connext-dds-6.0.1 urdfdom_headers"
 
+{0}
+
 # meta file performs the following patches as of 8/7/22
 # for python_orocos_kdl_vendor: missing python3 https://www.reddit.com/r/cmake/comments/otxfb4/comment/h724us5/  feck you from a salty engineer <3
 # for rclpy: missing python3 and issues with pybind11 https://github.com/ros2/rclpy/issues/920
@@ -80,8 +82,6 @@ if grep -q micro_ros_agent "./meta.repos"; then
         exit -3
     fi
 fi
-
-{0}
 
 # this build forces a full clean configure and rebuild of all packages. this should make everything relatively compliant assuming
 # the current repos remain buildable (failure https://github.com/micro-ROS/micro-ROS-Agent.gits do make it into release sometimes...)
