@@ -167,6 +167,15 @@ def target_configuration(settings: dict):
     print("\nConfiguring JetPack settings on target:")
     scriptRun = os.path.join("~", "scripts", "config_target", "configure_jetpack.bash")
     remoteExec(f"/bin/bash {scriptRun}", username, target)
+
+    print('''
+    Please enable the primary and external can busses on the target with the following command.
+
+    sudo /opt/nvidia/jetson-io/jetson-io.py
+
+    Navigate to "Configure Jetson 40 pin header" then "Configure header pins manually" and enable can0 and can1 functionality.
+    After enabling, navigate to "Save pin changes" then "Save and reboot to reconfigure pins" setup will then be complete.
+    ''')
       
     
 
