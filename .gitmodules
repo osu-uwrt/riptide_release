@@ -1,0 +1,28 @@
+[submodule "src/riptide_autonomy"]
+	path = src/riptide_autonomy
+	url = https://github.com/osu-uwrt/riptide_autonomy
+	branch = ros2
+[submodule "src/riptide_control"]
+	path = src/riptide_control
+	url = https://github.com/osu-uwrt/riptide_control
+	branch = master
+[submodule "src/riptide_core"]
+	path = src/riptide_core
+	url = https://github.com/osu-uwrt/riptide_core
+	branch = master
+[submodule "src/riptide_launch"]
+	path = src/riptide_launch
+	url = https://github.com/osu-uwrt/riptide_launch
+[submodule "src/riptide_perception"]
+	path = src/riptide_perception
+	url = https://github.com/osu-uwrt/riptide_perception
+[submodule "src/vectornav"]
+	path = src/vectornav
+	url = https://github.com/dawonn/vectornav
+	branch = ros2
+[submodule "src/chameleon_tf"]
+	path = src/chameleon_tf
+	url = https://github.com/coalman321/chameleon_tf
+[submodule "src/nortek_dvl"]
+	path = src/nortek_dvl
+	url = https://github.com/osu-uwrt/nortek_dvl
