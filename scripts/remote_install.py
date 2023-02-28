@@ -55,8 +55,9 @@ def config_menu():
     # scan the hosts file and ask if connecting to these
     targets = scan_hosts()
     print("If target does not appear in this list, add it to the /etc/hosts file")
-    targetSel = select_menu(targets, "Remote Target")
-    confDict["target_name"] = targets[targetSel]
+    targetSel = select_menu(targets[0], "Remote Target")
+    confDict["target_name"] = targets[0][targetSel]
+    confDict["target_ip"] = targets[1][targetSel]
 
     # scan for ROS installations availiable
     tarballs = glob.glob(os.path.join(HOME_DIR, "Downloads", f"{ROS_DISTRO}*.tar.gz"))
@@ -166,7 +167,8 @@ def target_configuration(settings: dict):
     # configure JetPack settings
     print("\nConfiguring JetPack settings on target:")
     scriptRun = os.path.join("~", "scripts", "config_target", "configure_jetpack.bash")
-    remoteExec(f"/bin/bash {scriptRun}", username, target)
+    remIP = settings["target_ip"]
+    remoteExec(f"/bin/bash {scriptRun} {remIP}", username, target)
 
     print('''
     Please enable the primary and external can busses on the target with the following command.
@@ -185,6 +187,7 @@ def target_configuration(settings: dict):
 
 def scan_hosts() -> list:
     hosts = []
+    ips = []
     # read etc hosts
     with open("/etc/hosts", "r") as data:
         lines = data.readlines()
@@ -194,9 +197,11 @@ def scan_hosts() -> list:
 
         # get the names for each host
         for line in filteredLines:
-            hosts.append(line.split("#")[0].split()[1])
+            splitLine = line.split("#")[0].split()
+            hosts.append(splitLine[1])
+            ips.append(splitLine[0])
         
-    return hosts
+    return (hosts, ips) 
 
 
 # helper function for building the config menus when doing selections

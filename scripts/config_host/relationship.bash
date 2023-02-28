@@ -29,9 +29,14 @@ mkdir ~/.ssh/
 
 if [ "$(grep ssh-agent ~/.bashrc)" = "" -a "$USER" = $USERNAME ]
 then
-	echo "eval \"\$(ssh-agent -s)\" > /dev/null" >> ~/.bashrc
-	echo "ssh-add -D > /dev/null" >> ~/.bashrc
-	echo "ssh-add ~/.ssh/sshkey_${TARGET} > /dev/null" >> ~/.bashrc
+	cat > ~/.bashrc <<EOF 
+eval "$(ssh-agent -s)" > /dev/null
+ssh-add -D > /dev/null
+shopt -s extglob
+ssh-add ~/.ssh/sshkey_!(*.pub) > /dev/null
+shopt -u extglob
+EOF
+    
 	eval $(ssh-agent -s)
 fi
 

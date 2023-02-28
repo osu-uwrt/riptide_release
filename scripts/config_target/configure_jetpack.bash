@@ -5,6 +5,13 @@ if [ "$EUID" -ne 0 ]; then
     exit
 fi
 
+if [ $# -ge 1 ]; then
+    DEVICE_IP=$1
+else
+    echo "This script needs a device IP to continue"
+    exit
+fi
+
 ARCH=$(dpkg --print-architecture)
 if [ ! "$ARCH" == *"aarch64"* ]; then
     echo "Updating fan control"
