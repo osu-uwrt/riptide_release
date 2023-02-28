@@ -13,15 +13,24 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=/bin/bash ros2 launch {0} {1}
+ExecStart=/usr/bin/bash /etc/systemd/system/{0}
 StandardOutput=inherit
 StandardError=inherit
-Restart={2}
-User={3}
+Restart={1}
+User={2}
 
 
 [Install]
 WantedBy=multi-user.target
+'''
+
+SVC_SCRIPT = '''
+#!/bin/bash
+
+source /home/{0}/jetson_install/install/setup.bash
+source /home/{0}/colcon_deploy/install/setup.bash
+
+ros2 run {1} {2}
 '''
 
 def execute(fullCmd, printOut=False):
@@ -60,20 +69,34 @@ if __name__ == "__main__":
     print(f"Service will launch {SVC_LAUNCH} from {SVC_ROS_PKG}")
     print(f"Restart policy is {SVC_RESTART}")
 
-    serviceFile = SVC_PATTERN
-    serviceFile = serviceFile.format(SVC_ROS_PKG, SVC_LAUNCH, SVC_RESTART, SVC_USER)
-    serviceFileName = f"ros2_launch_{SVC_NAME}.service"
+    serviceScript = SVC_SCRIPT
+    serviceScript = serviceScript.format(SVC_USER, SVC_ROS_PKG, SVC_LAUNCH)
+    serviceScriptName = f"ros2_{SVC_NAME}_run.bash"
 
-    tmpFile = os.path.join("/tmp", serviceFileName)
-    print(f"Writing to service file {tmpFile}")
-    with open(tmpFile, 'w') as file:
+    serviceFile = SVC_PATTERN
+    serviceFile = serviceFile.format(serviceScriptName, SVC_RESTART, SVC_USER)
+    serviceFileName = f"ros2_{SVC_NAME}.service"
+
+    tmpSvc = os.path.join("/tmp", serviceFileName)
+    print(f"Writing to service file {tmpSvc}")
+    with open(tmpSvc, 'w') as file:
         file.write(serviceFile)
+
+    tmpScrpt = os.path.join("/tmp", serviceScriptName)
+    print(f"Writing to service file {tmpScrpt}")
+    with open(tmpScrpt, 'w') as file:
+        file.write(serviceScript)
 
     try:
         # move the source file into the correct location
         systemFile = os.path.join("/etc", "systemd", "system", serviceFileName)
+        systemScript = os.path.join("/etc", "systemd", "system", serviceScriptName)
+
         print(f"Moving service file to {systemFile}")
-        execute(["sudo", "mv", tmpFile, systemFile], True)
+        print(f"Moving service script to {systemScript}")
+
+        execute(["sudo", "mv", tmpSvc, systemFile], True)
+        execute(["sudo", "mv", tmpScrpt, systemScript], True)
 
         # register, enable and start the service
         execute(['sudo', 'systemctl', 'daemon-reload'], True)
