@@ -44,7 +44,7 @@ EOF
 Name=eth0
 
 [Network]
-Address=192.168.1.22/24
+Address=${DEVICE_IP}/24
 Gateway=192.168.1.1
 DNS=8.8.8.8 1.1.1.1
 EOF
