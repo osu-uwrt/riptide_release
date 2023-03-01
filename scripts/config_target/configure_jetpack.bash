@@ -81,6 +81,13 @@ EOF
     systemctl unmask systemd-networkd
     systemctl enable systemd-networkd
 
+    # add to dialout
+    sudo usermod -aG dialout $USER
+
+    # add the dvl to the hosts file
+    cp /etc/hosts /tmp/host_edit
+    echo "192.168.1.212    uwrt-dvl" >> /tmp/host_edit
+
 else
     echo "This script is not running on jetson hardware. Aborting"
     exit

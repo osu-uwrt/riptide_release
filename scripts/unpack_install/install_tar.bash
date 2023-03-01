@@ -32,3 +32,13 @@ echo "Invoking rosdep"
 # run rosdep against the packages to try to resolve the rest
 cd ~/jetson_install
 rosdep install --from-paths src --ignore-src -y --skip-keys "fastcdr rti-connext-dds-6.0.1 urdfdom_headers"
+
+# make the system wide script
+cat > /tmp/setup.bash << EOF
+#!/bin/bash
+
+source ${HOME}/jetson_install/install/setup.bash
+EOF
+
+sudo mkdir -p /opt/ros/${ROS_DISTRO}/
+sudo mv /tmp/setup.bash /opt/ros/${ROS_DISTRO}/
