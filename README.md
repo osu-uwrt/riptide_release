@@ -15,6 +15,14 @@ After a pool test, this repository should be tagged with the date of the test, t
 ## Robot Software
 This repo is set up such that each of the packages found in the `osu-uwrt/development` workspaces should be set as a submodule in this repository. The submodules are placed in the `src` directory and are version pinned to the correct versions running on the robot. This is intended to make controlling the code being tested on the robot a streamlined process. 
 
+## Jetson Target Setup
+This repo also contains a python script capable of setting up an Nvidia Jetson target computer with a ROS build created by the [cross building scripts](./scripts/cross_build/README.md) in this repo. For this to work properly, the Jetson and this laptop must both have a valid internet connection. It will do all of the nessecary configuration for the jetson, install ros and add local relationships for your user. 
+1. Setup the jetson IP into your hosts file.
+2. Have a copy of the ROS tar you wish to install in your downloads folder.
+3. Install fabric for python via `pip install fabric` for ssh connections
+4. Run the `remote_install.py`and follow the configuration prompts. the flashing will begin after the flashing process starts
+5. for subsequent re-runs, a `-p` flag can be used to re-run the previous configuration without needing to go through the menu.
+
 ## Cross Build Instructions
 For cross building ROS distributions to the outdated versions of ubuntu that nvidia has decided to ship on their jetson boards, this repository contains a cross building system. 
 See the [Cross Compiling Readme](./scripts/cross_build/README.md) for more information.
