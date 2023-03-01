@@ -26,3 +26,6 @@
 [submodule "src/nortek_dvl"]
 	path = src/nortek_dvl
 	url = https://github.com/osu-uwrt/nortek_dvl
+[submodule "src/riptide_gui"]
+	path = src/riptide_gui
+	url = https://github.com/osu-uwrt/riptide_gui
