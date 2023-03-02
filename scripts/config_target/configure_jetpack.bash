@@ -87,6 +87,7 @@ EOF
     # add the dvl to the hosts file
     cp /etc/hosts /tmp/host_edit
     echo "192.168.1.212    uwrt-dvl" >> /tmp/host_edit
+    sudo mv /tmp/host_edit /etc/hosts
 
 else
     echo "This script is not running on jetson hardware. Aborting"
