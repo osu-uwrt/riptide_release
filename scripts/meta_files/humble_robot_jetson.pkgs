@@ -1,1 +1,1 @@
-libasio-dev libtinyxml2-dev libacl1-dev libbenchmark-dev python3-lark python3-numpy libeigen3-dev libspdlog-dev
+libasio-dev libtinyxml2-dev libacl1-dev libbenchmark-dev python3-lark python3-numpy libeigen3-dev libspdlog-dev libopencv-dev
