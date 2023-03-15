@@ -27,4 +27,4 @@ cd onnxruntime/
 
 # sudo pip3 install build/Linux/Release/dist/onnxruntime_gpu-1.12.0-cp38-cp38-linux_aarch64.whl
 sudo ln -snf $(pwd)/build/Linux/RelWithDebInfo/*.so /usr/lib/ 
-
+sudo ln -snf /usr/lib/libonnxruntime.so /usr/lib/libonnxruntime.so.1.13.1
