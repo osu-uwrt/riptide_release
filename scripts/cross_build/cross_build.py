@@ -39,6 +39,7 @@ RUN mkdir /ros_build
 BUILD_SCRIPT_TEMPLATE = """#!/bin/bash
 
 # first download the apt packages we need
+apt update
 apt install -y $(cat /ros_build/meta.pkgs)
 if [[ $? -ne 0 ]]; then
     echo "failed to find one or more packages"

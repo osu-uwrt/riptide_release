@@ -29,3 +29,12 @@
 [submodule "src/riptide_gui"]
 	path = src/riptide_gui
 	url = https://github.com/osu-uwrt/riptide_gui
+[submodule "src/apriltag_msgs"]
+	path = src/apriltag_msgs
+	url = https://github.com/christianrauch/apriltag_msgs.git
+[submodule "src/apriltag_ros"]
+	path = src/apriltag_ros
+	url = https://github.com/christianrauch/apriltag_ros.git
+[submodule "src/zed-ros2-wrapper"]
+	path = src/zed-ros2-wrapper
+	url = https://github.com/osu-uwrt/zed-ros2-wrapper.git
