@@ -18,7 +18,7 @@ cd /usr/local/include
 sudo mkdir onnxruntime
 sudo chown -R $USER onnxruntime
 
-# git clone --recursive -b rel-1.13.1 https://github.com/microsoft/onnxruntime
+git clone --recursive -b rel-1.13.1 https://github.com/microsoft/onnxruntime
 cd onnxruntime/
 
 ./build.sh --config RelWithDebInfo --update --build --parallel \
