@@ -5,7 +5,7 @@ if [ $# -ge 1 ]; then
 else
     echo "This script needs one argument, ADDRESS"
     echo "A second argment can be added for a remote username other than ros"
-    echo "./install_tar.bash <ADRRESS> <USERNAME>"
+    echo "./date_set.bash <ADRRESS> <USERNAME>"
     exit
 fi
 
@@ -15,8 +15,6 @@ if [ $# -ge 2 ]; then
 else
     USERNAME="ros"
 fi
-
-exit
 
 date_seconds=$(date +"%s")
 date_string=$(date -u --date=@$date_seconds)

@@ -1,3 +1,5 @@
+#! /bin/python3
+
 import os, stat, hashlib, json, tarfile, getpass, yaml
 from time import sleep
 import argparse
@@ -10,7 +12,7 @@ USER_NAME = getpass.getuser()
 META_EXTENSIONS = [".pkgs", ".meta", ".repos"]
 CLEAN_DIRS = ["build", "install", "log"]
 
-DOCKERFILE_TEMPLATE = """FROM osrf/ubuntu_arm64:{0}
+DOCKERFILE_TEMPLATE = """FROM osrf/{3}:{0}
 # set dpkg to non-interactive install
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -18,9 +20,9 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt update && apt upgrade -y 
 
 # generate the UTF-8 locales
-RUN apt update && apt install locales
+RUN apt update && apt install locales -y
 RUN locale-gen en_US en_US.UTF-8
-RUN update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+ENV LC_ALL en_US.UTF-8
 ENV LANG en_US.UTF-8
 
 # make sure we have pip and all that too for colcon and rosdep
@@ -141,9 +143,15 @@ def main():
 def configure_menu() -> dict:
     confDict = {}
 
+    os_dist_list = ["debian_arm64", "ubuntu_arm64"]
+    os_dist_sel = select_menu(os_dist_list, "Linux distribution")
+    confDict["os_dist"] = os_dist_list[os_dist_sel]
+
+    os_dist_sel_result = os_dist_list[os_dist_sel]
+
     # prompt for target OS build
-    osOptions = get_docker_tags("osrf", "ubuntu_arm64")
-    osSel = select_menu(osOptions, "Ubuntu distribution")
+    osOptions = get_docker_tags("osrf", os_dist_sel_result)
+    osSel = select_menu(osOptions, f"{os_dist_sel_result} distribution release")
     confDict["base_os"] = osOptions[osSel]
 
     # prompt for which meta file set to use from the unique set
@@ -170,6 +178,7 @@ def configure_menu() -> dict:
     
     # set the cross build workspace dir
     confDict["cross_dir"] = os.path.join(USER_HOME, "osu-uwrt", "jetson_install")
+    confDict["ros_dist"] = confDict["meta_name"][0 : confDict["meta_name"].find("_")]
 
     # write the config to tmp as a yaml file
     with open("/tmp/cross_build_cf.yaml", "w") as file:
@@ -182,7 +191,7 @@ def make_docker_image(settings: dict):
     baseOs = settings["base_os"]
 
     # write the dockerfile to the local directory
-    dockerfile = DOCKERFILE_TEMPLATE.format(baseOs, "")
+    dockerfile = DOCKERFILE_TEMPLATE.format(baseOs, "", settings["ros_dist"], settings["os_dist"])
     with open("Dockerfile", "w") as file:
         file.write(dockerfile)
     
