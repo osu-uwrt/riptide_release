@@ -244,7 +244,7 @@ def checkout_sources(settings: dict):
         print("Meta source files differ, pulling sources")
 
         # run the vcs clone
-        exitCode, _ = execute(["vcs", "import", crossSrcs, "--input", os.path.join(settings["cross_dir"], "meta.repos")], False)
+        exitCode, _ = execute(["vcs", "import", crossSrcs, "--input", os.path.join(settings["cross_dir"], "meta.repos"), "--shallow"], False)
         if(exitCode != 0):
             print("VCS import / update failed. You may not be connected to the internet.")
             print("Proceeding without checkout in 5 seconds")
