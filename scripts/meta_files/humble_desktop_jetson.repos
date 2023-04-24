@@ -411,3 +411,19 @@ repositories:
     type: git
     url: https://github.com/ros2/yaml_cpp_vendor.git
     version: 8.0.1
+  image_transport_plugins/compressed_depth_image_transport:
+    type: git
+    url: https://github.com/ros2-gbp/image_transport_plugins-release.git
+    version: release/humble/compressed_depth_image_transport/2.5.0-2
+  image_transport_plugins/compressed_image_transport:
+    type: git
+    url: https://github.com/ros2-gbp/image_transport_plugins-release.git
+    version: release/humble/compressed_image_transport/2.5.0-2
+  image_transport_plugins/image_transport_plugins:
+    type: git
+    url: https://github.com/ros2-gbp/image_transport_plugins-release.git
+    version: release/humble/image_transport_plugins/2.5.0-2
+  image_transport_plugins/theora_image_transport:
+    type: git
+    url: https://github.com/ros2-gbp/image_transport_plugins-release.git
+    version: release/humble/theora_image_transport/2.5.0-2

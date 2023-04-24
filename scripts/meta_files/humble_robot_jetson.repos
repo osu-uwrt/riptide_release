@@ -262,11 +262,11 @@ repositories:
   control_msgs:
     type: git
     url: https://github.com/ros2-gbp/control_msgs-release.git
-    version: release/humble/control_msgs/4.1.0-1
+    version: release/humble/control_msgs/4.1.1-1
   control_toolbox:
     type: git
     url: https://github.com/ros2-gbp/control_toolbox-release.git
-    version: release/humble/control_toolbox/2.2.0-1
+    version: release/humble/control_toolbox/3.0.0-1
   cyclonedds:
     type: git
     url: https://github.com/ros2-gbp/cyclonedds-release.git
@@ -310,11 +310,11 @@ repositories:
   diagnostics/diagnostic_aggregator:
     type: git
     url: https://github.com/ros2-gbp/diagnostics-release.git
-    version: release/humble/diagnostic_aggregator/3.1.0-2
+    version: release/humble/diagnostic_aggregator/3.1.2-1
   diagnostics/diagnostic_updater:
     type: git
     url: https://github.com/ros2-gbp/diagnostics-release.git
-    version: release/humble/diagnostic_updater/3.1.0-2
+    version: release/humble/diagnostic_updater/3.1.2-1
   eigen3_cmake_module:
     type: git
     url: https://github.com/ros2-gbp/eigen3_cmake_module-release.git
@@ -439,6 +439,22 @@ repositories:
     type: git
     url: https://github.com/ros2-gbp/image_pipeline-release.git
     version: release/humble/tracetools_image_pipeline/3.0.0-1
+  image_transport_plugins/compressed_depth_image_transport:
+    type: git
+    url: https://github.com/ros2-gbp/image_transport_plugins-release.git
+    version: release/humble/compressed_depth_image_transport/2.5.0-2
+  image_transport_plugins/compressed_image_transport:
+    type: git
+    url: https://github.com/ros2-gbp/image_transport_plugins-release.git
+    version: release/humble/compressed_image_transport/2.5.0-2
+  image_transport_plugins/image_transport_plugins:
+    type: git
+    url: https://github.com/ros2-gbp/image_transport_plugins-release.git
+    version: release/humble/image_transport_plugins/2.5.0-2
+  image_transport_plugins/theora_image_transport:
+    type: git
+    url: https://github.com/ros2-gbp/image_transport_plugins-release.git
+    version: release/humble/theora_image_transport/2.5.0-2
   interactive_markers:
     type: git
     url: https://github.com/ros2-gbp/interactive_markers-release.git
@@ -706,7 +722,7 @@ repositories:
   robot_localization:
     type: git
     url: https://github.com/ros2-gbp/robot_localization-release.git
-    version: release/humble/robot_localization/3.3.1-2
+    version: release/humble/robot_localization/3.5.0-1
   robot_state_publisher:
     type: git
     url: https://github.com/ros2-gbp/robot_state_publisher-release.git
