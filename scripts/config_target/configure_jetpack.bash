@@ -89,6 +89,27 @@ EOF
     echo "192.168.1.212    uwrt-dvl" >> /tmp/host_edit
     sudo mv /tmp/host_edit /etc/hosts
 
+
+    # Configures SD automount
+    cat > /etc/systemd/system/mnt-sd.mount <<EOF
+[Unit]
+Description=Mount External MicroSD part1 at /mnt/sd
+
+[Mount]
+What=/dev/disk/by-path/platform-3400000.sdhci-part1
+Where=/mnt/sd
+Type=vfat
+Options=noauto,nofail
+EOF
+
+    cat > /etc/udev/rules.d/99-automount-sd.rules <<EOF
+# Automounts SD Card on nvidia jetson orin
+ACTION=="add",
+SUBSYSTEM=="block",
+ENV{DEVLINKS}=="*/dev/disk/by-path/platform-3400000.sdhci-part1*", 
+ENV{SYSTEMD_WANTS}="mnt-sd.mount"
+EOF
+
 else
     echo "This script is not running on jetson hardware. Aborting"
     exit
