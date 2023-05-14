@@ -1,5 +1,7 @@
 #!/bin/bash 
 
+export DEBIAN_FRONTEND=noninteractive
+
 if [ $# -ge 2 ]; then
     export ROS_DISTRO=$1
     ROS_TAR=$2
@@ -18,8 +20,6 @@ cd ~
 
 # extract archive
 tar -xf $ROS_TAR
-
-DEBIAN_FRONTEND=noninteractive
 
 # after extraction run apt against the meta file
 echo "Installing meta deps"
