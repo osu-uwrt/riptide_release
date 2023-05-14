@@ -1,0 +1,14 @@
+# !/bin/sh
+
+# /etc/vnc/xstartup (Must be executable)
+
+test x"$SHELL" = x"" && SHELL=/bin/bash
+test x"$1"     = x"" && set -- default
+
+vncconfig -iconic &
+"$SHELL" -l <<EOF
+export XDG_SESSION_TYPE=x11
+dbus-launch --exit-with-session env GNOME_SHELL_SESSION_MODE=ubuntu XDG_SESSION_DESKTOP=ubuntu XDG_CURRENT_DESKTOP=ubuntu:GNOME GDMSESSION=ubuntu DESKTOP_SESSION=ubuntu GTK_MODULES=gail:atk-bridge /usr/bin/gnome-session --session=ubuntu
+exec /etc/X11/Xsession "$@"
+EOF
+vncserver -kill $DISPLAY

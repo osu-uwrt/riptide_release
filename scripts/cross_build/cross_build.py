@@ -197,7 +197,10 @@ def make_docker_image(settings: dict):
     
     # now build the container and tag it
     containerTag = f"arm64_ros_builder_{baseOs}:latest"
-    dockerCmd = ["docker", "build", ".", "--tag", containerTag]
+    dockerCmd = ["docker", "build", ".",
+                  "--tag", containerTag,
+                #   "--no-cache",
+        ]
 
     print("Building cross compile container")
     exitCode, _ = execute(dockerCmd, True)
@@ -318,10 +321,10 @@ def build_sources(settings: dict):
 
     print("Building sources")
     dockerCmd = [
-        "docker", "run", "-v", 
-        f"{workDir}:/ros_build", 
+        "docker", "run",
+        "-v", f"{workDir}:/ros_build", 
         settings["docker_tag"], "/bin/bash", 
-        "/ros_build/build.bash"
+        "/ros_build/build.bash",
     ]
 
     flat = ""

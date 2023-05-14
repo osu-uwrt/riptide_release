@@ -1,0 +1,20 @@
+[Unit]
+Description=Remote Desktop Service (VNC)
+After=network.target
+
+[Service]
+Type=simple
+User=ros
+Group=ros
+PAMName=ros
+WorkingDirectory=/home/ros
+
+Restart=always
+RestartSec=5s
+PIDFile=/home/ros/.vnc/%H:%i.pid
+ExecStartPre=-/usr/bin/vncserver -kill :%i > /dev/null 2>&1
+ExecStart=/usr/bin/vncserver -depth 16 -fg -localhost no :%i
+ExecStop=/usr/bin/vncserver -kill :%i
+
+[Install]
+WantedBy=multi-user.target
