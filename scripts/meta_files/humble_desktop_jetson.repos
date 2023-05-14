@@ -427,3 +427,7 @@ repositories:
     type: git
     url: https://github.com/ros2-gbp/image_transport_plugins-release.git
     version: release/humble/theora_image_transport/2.5.0-2
+  vision_opencv/cv_bridge:
+    type: git
+    url: https://github.com/ros2-gbp/vision_opencv-release.git
+    version: release/humble/cv_bridge/3.2.1-1

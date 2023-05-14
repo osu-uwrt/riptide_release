@@ -1,1 +1,4 @@
-libasio-dev libtinyxml2-dev libacl1-dev libbenchmark-dev python3-lark python3-numpy libeigen3-dev libspdlog-dev
+libasio-dev libtinyxml2-dev libacl1-dev libbenchmark-dev python3-lark python3-numpy libeigen3-dev libspdlog-dev libx11-6
+libxaw7-dev qtbase5-dev qt5-qmake cmake pyqt5-dev libqt5x11extras5-dev libqt5x11extras5-dev libx11-data libx11-dev
+libx11-protocol-perl libx11-xcb1 libxkbcommon-x11-0 x11-apps x11-common libxrandr-dev python3-pyqt5 libfreetype6-dev
+libopencv-dev
