@@ -50,8 +50,8 @@ if __name__ == "__main__":
     parser = ArgumentParser(description="Setup remote Jetson target")
     # always needed args
     parser.add_argument("name", type=str, help="name of the service to create")
-    parser.add_argument("ros_launch_package", type=str, help="name of the package with the launch file inside")
-    parser.add_argument("ros_launch_file", type=str, help="name of the launch file to start")
+    parser.add_argument("ros_launch_package", type=str, help="name of the package with the executable file inside")
+    parser.add_argument("ros_launch_file", type=str, help="name of the executable file to start")
     parser.add_argument("restart_policy", type=str, help="restart policy to use")
 
 
