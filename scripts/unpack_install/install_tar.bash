@@ -19,6 +19,8 @@ cd ~
 # extract archive
 tar -xf $ROS_TAR
 
+DEBIAN_FRONTEND=noninteractive
+
 # after extraction run apt against the meta file
 echo "Installing meta deps"
 sudo apt install -y $(cat ~/osu_uwrt/jetson_install/meta.pkgs)

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+DEBIAN_FRONTEND=noninteractive
+
 # https://forums.developer.nvidia.com/t/issue-using-onnxruntime-with-cudaexecutionprovider-on-orin/219457/8
 
 sudo apt install -y --no-install-recommends build-essential software-properties-common libopenblas-dev libpython3.8-dev python3-pip python3-dev python3-setuptools python3-wheel

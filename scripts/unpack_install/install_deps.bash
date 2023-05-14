@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export DEBIAN_FRONTEND=noninteractive
+
 sudo apt update && sudo apt upgrade -y
 
 # Setup the ROS repos

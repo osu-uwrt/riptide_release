@@ -1,6 +1,11 @@
+#!/bin/bash
+
+DEBIAN_FRONTEND=noninteractive
+
 #
 # install prerequisites (many of these are for numpy)
 #
+
 sudo apt-get -y update
 sudo apt-get -y install autoconf bc build-essential g++-8 gcc-8 clang-8 lld-8 \
 	gettext-base gfortran-8 iputils-ping libbz2-dev libc++-dev libcgal-dev \
