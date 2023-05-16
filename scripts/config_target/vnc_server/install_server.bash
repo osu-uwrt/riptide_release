@@ -1,4 +1,4 @@
-#!/bin/bash
+ #!/bin/bash
 
 if [ "$EUID" -ne 0 ]; then
     echo "This script can only be run as root"
@@ -8,6 +8,12 @@ fi
 # install the server
 
 apt update && apt install -y tigervnc-standalone-server
+
+# make some dirs
+mkdir /etc/vnc
+mkdir /home/$SUDO_USER/.vnc
+
+chown $SUDO_USER /home/$SUDO_USER/.vnc
 
 # move the service files
 cp ./etc_xstartup /etc/vnc/xstartup
