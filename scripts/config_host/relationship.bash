@@ -29,7 +29,7 @@ mkdir ~/.ssh/
 
 if [ "$(grep ssh-agent ~/.bashrc)" = "" -a "$USER" = $USERNAME ]
 then
-	cat > ~/.bashrc <<EOF 
+	cat >> ~/.bashrc <<EOF 
 eval "$(ssh-agent -s)" > /dev/null
 ssh-add -D > /dev/null
 shopt -s extglob
