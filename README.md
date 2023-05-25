@@ -31,9 +31,22 @@ See the [Cross Compiling Readme](./scripts/cross_build/README.md) for more infor
 
 
 ## Helpful Commands
+Command to start RViz for Talos:
+```
+ros2 launch riptide_rviz rviz_start.launch.py robot:=talos
+```
+
+Restart the launch service on the robot:
+```
+sudo systemctl restart ros2_launch_service.service
+```
+
+View console of the robot over ssh:
+```
+journalctl -f -u ros2_launch_service.service -o cat
+```
 
 Command to set the map transform to the tag:
-
 ```
 ros2 action send_goal /talos/map/model_tf chameleon_tf_msgs/action/ModelFrame -f "{monitor_parent: 'talos_base_link', monitor_child: 'estimated_origin_frame'}" 
 ```
@@ -41,8 +54,4 @@ ros2 action send_goal /talos/map/model_tf chameleon_tf_msgs/action/ModelFrame -f
 check for connected tf trees: 
 ```
 ros2 run tf2_ros tf2_echo world estimated_origin_frame
-```
-Restart the launch service on the robot:
-```
-sudo systemctl restart ros2
 ```
