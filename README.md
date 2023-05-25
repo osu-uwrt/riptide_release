@@ -26,3 +26,23 @@ This repo also contains a python script capable of setting up an Nvidia Jetson t
 ## Cross Build Instructions
 For cross building ROS distributions to the outdated versions of ubuntu that nvidia has decided to ship on their jetson boards, this repository contains a cross building system. 
 See the [Cross Compiling Readme](./scripts/cross_build/README.md) for more information.
+
+
+
+
+## Helpful Commands
+
+Command to set the map transform to the tag:
+
+```
+ros2 action send_goal /talos/map/model_tf chameleon_tf_msgs/action/ModelFrame -f "{monitor_parent: 'talos_base_link', monitor_child: 'estimated_origin_frame'}" 
+```
+
+check for connected tf trees: 
+```
+ros2 run tf2_ros tf2_echo world estimated_origin_frame
+```
+Restart the launch service on the robot:
+```
+sudo systemctl restart ros2
+```
