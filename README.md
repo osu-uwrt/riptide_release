@@ -48,7 +48,7 @@ journalctl -f -u ros2_launch_service.service -o cat
 
 Command to set the map transform to the tag:
 ```
-ros2 action send_goal /talos/map/model_tf chameleon_tf_msgs/action/ModelFrame -f "{monitor_parent: 'talos_base_link', monitor_child: 'estimated_origin_frame'}" 
+ros2 action send_goal /talos/map/model_tf chameleon_tf_msgs/action/ModelFrame -f "{monitor_parent: 'world', monitor_child: 'estimated_origin_frame'}" 
 ```
 
 check for connected tf trees: 
