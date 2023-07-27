@@ -37,4 +37,4 @@
 	url = https://github.com/christianrauch/apriltag_ros.git
 [submodule "src/zed-ros2-wrapper"]
 	path = src/zed-ros2-wrapper
-	url = https://github.com/osu-uwrt/zed-ros2-wrapper.git
+	url = https://github.com/stereolabs/zed-ros2-wrapper.git
