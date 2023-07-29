@@ -51,6 +51,11 @@ Command to set the map transform to the tag:
 ros2 action send_goal /talos/map/model_tf chameleon_tf_msgs/action/ModelFrame -f "{monitor_parent: 'world', monitor_child: 'estimated_origin_frame'}" 
 ```
 
+Command to calibrate the IMU
+```
+ros2 action send_goal /talos/vectornav/mag_cal vectornav_msgs/action/MagCal -f
+```
+
 check for connected tf trees: 
 ```
 ros2 run tf2_ros tf2_echo world estimated_origin_frame
