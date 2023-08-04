@@ -18,7 +18,7 @@
 	url = https://github.com/osu-uwrt/riptide_perception
 [submodule "src/vectornav"]
 	path = src/vectornav
-	url = https://github.com/dawonn/vectornav
+	url = https://github.com/osu-uwrt-bot/vectornav
 	branch = ros2
 [submodule "src/chameleon_tf"]
 	path = src/chameleon_tf
