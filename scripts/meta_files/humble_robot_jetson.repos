@@ -2,87 +2,87 @@ repositories:
   ament_cmake/ament_cmake:
     type: git
     url: https://github.com/ros2-gbp/ament_cmake-release.git
-    version: release/humble/ament_cmake/1.3.3-1
+    version: release/humble/ament_cmake/1.3.5-1
   ament_cmake/ament_cmake_auto:
     type: git
     url: https://github.com/ros2-gbp/ament_cmake-release.git
-    version: release/humble/ament_cmake_auto/1.3.3-1
+    version: release/humble/ament_cmake_auto/1.3.5-1
   ament_cmake/ament_cmake_core:
     type: git
     url: https://github.com/ros2-gbp/ament_cmake-release.git
-    version: release/humble/ament_cmake_core/1.3.3-1
+    version: release/humble/ament_cmake_core/1.3.5-1
   ament_cmake/ament_cmake_export_definitions:
     type: git
     url: https://github.com/ros2-gbp/ament_cmake-release.git
-    version: release/humble/ament_cmake_export_definitions/1.3.3-1
+    version: release/humble/ament_cmake_export_definitions/1.3.5-1
   ament_cmake/ament_cmake_export_dependencies:
     type: git
     url: https://github.com/ros2-gbp/ament_cmake-release.git
-    version: release/humble/ament_cmake_export_dependencies/1.3.3-1
+    version: release/humble/ament_cmake_export_dependencies/1.3.5-1
   ament_cmake/ament_cmake_export_include_directories:
     type: git
     url: https://github.com/ros2-gbp/ament_cmake-release.git
-    version: release/humble/ament_cmake_export_include_directories/1.3.3-1
+    version: release/humble/ament_cmake_export_include_directories/1.3.5-1
   ament_cmake/ament_cmake_export_interfaces:
     type: git
     url: https://github.com/ros2-gbp/ament_cmake-release.git
-    version: release/humble/ament_cmake_export_interfaces/1.3.3-1
+    version: release/humble/ament_cmake_export_interfaces/1.3.5-1
   ament_cmake/ament_cmake_export_libraries:
     type: git
     url: https://github.com/ros2-gbp/ament_cmake-release.git
-    version: release/humble/ament_cmake_export_libraries/1.3.3-1
+    version: release/humble/ament_cmake_export_libraries/1.3.5-1
   ament_cmake/ament_cmake_export_link_flags:
     type: git
     url: https://github.com/ros2-gbp/ament_cmake-release.git
-    version: release/humble/ament_cmake_export_link_flags/1.3.3-1
+    version: release/humble/ament_cmake_export_link_flags/1.3.5-1
   ament_cmake/ament_cmake_export_targets:
     type: git
     url: https://github.com/ros2-gbp/ament_cmake-release.git
-    version: release/humble/ament_cmake_export_targets/1.3.3-1
+    version: release/humble/ament_cmake_export_targets/1.3.5-1
   ament_cmake/ament_cmake_gen_version_h:
     type: git
     url: https://github.com/ros2-gbp/ament_cmake-release.git
-    version: release/humble/ament_cmake_gen_version_h/1.3.3-1
+    version: release/humble/ament_cmake_gen_version_h/1.3.5-1
   ament_cmake/ament_cmake_gmock:
     type: git
     url: https://github.com/ros2-gbp/ament_cmake-release.git
-    version: release/humble/ament_cmake_gmock/1.3.3-1
+    version: release/humble/ament_cmake_gmock/1.3.5-1
   ament_cmake/ament_cmake_google_benchmark:
     type: git
     url: https://github.com/ros2-gbp/ament_cmake-release.git
-    version: release/humble/ament_cmake_google_benchmark/1.3.3-1
+    version: release/humble/ament_cmake_google_benchmark/1.3.5-1
   ament_cmake/ament_cmake_gtest:
     type: git
     url: https://github.com/ros2-gbp/ament_cmake-release.git
-    version: release/humble/ament_cmake_gtest/1.3.3-1
+    version: release/humble/ament_cmake_gtest/1.3.5-1
   ament_cmake/ament_cmake_include_directories:
     type: git
     url: https://github.com/ros2-gbp/ament_cmake-release.git
-    version: release/humble/ament_cmake_include_directories/1.3.3-1
+    version: release/humble/ament_cmake_include_directories/1.3.5-1
   ament_cmake/ament_cmake_libraries:
     type: git
     url: https://github.com/ros2-gbp/ament_cmake-release.git
-    version: release/humble/ament_cmake_libraries/1.3.3-1
+    version: release/humble/ament_cmake_libraries/1.3.5-1
   ament_cmake/ament_cmake_pytest:
     type: git
     url: https://github.com/ros2-gbp/ament_cmake-release.git
-    version: release/humble/ament_cmake_pytest/1.3.3-1
+    version: release/humble/ament_cmake_pytest/1.3.5-1
   ament_cmake/ament_cmake_python:
     type: git
     url: https://github.com/ros2-gbp/ament_cmake-release.git
-    version: release/humble/ament_cmake_python/1.3.3-1
+    version: release/humble/ament_cmake_python/1.3.5-1
   ament_cmake/ament_cmake_target_dependencies:
     type: git
     url: https://github.com/ros2-gbp/ament_cmake-release.git
-    version: release/humble/ament_cmake_target_dependencies/1.3.3-1
+    version: release/humble/ament_cmake_target_dependencies/1.3.5-1
   ament_cmake/ament_cmake_test:
     type: git
     url: https://github.com/ros2-gbp/ament_cmake-release.git
-    version: release/humble/ament_cmake_test/1.3.3-1
+    version: release/humble/ament_cmake_test/1.3.5-1
   ament_cmake/ament_cmake_version:
     type: git
     url: https://github.com/ros2-gbp/ament_cmake-release.git
-    version: release/humble/ament_cmake_version/1.3.3-1
+    version: release/humble/ament_cmake_version/1.3.5-1
   ament_cmake_ros/ament_cmake_ros:
     type: git
     url: https://github.com/ros2-gbp/ament_cmake_ros-release.git
@@ -102,87 +102,87 @@ repositories:
   ament_lint/ament_cmake_copyright:
     type: git
     url: https://github.com/ros2-gbp/ament_lint-release.git
-    version: release/humble/ament_cmake_copyright/0.12.5-1
+    version: release/humble/ament_cmake_copyright/0.12.8-1
   ament_lint/ament_cmake_cppcheck:
     type: git
     url: https://github.com/ros2-gbp/ament_lint-release.git
-    version: release/humble/ament_cmake_cppcheck/0.12.5-1
+    version: release/humble/ament_cmake_cppcheck/0.12.8-1
   ament_lint/ament_cmake_cpplint:
     type: git
     url: https://github.com/ros2-gbp/ament_lint-release.git
-    version: release/humble/ament_cmake_cpplint/0.12.5-1
+    version: release/humble/ament_cmake_cpplint/0.12.8-1
   ament_lint/ament_cmake_flake8:
     type: git
     url: https://github.com/ros2-gbp/ament_lint-release.git
-    version: release/humble/ament_cmake_flake8/0.12.5-1
+    version: release/humble/ament_cmake_flake8/0.12.8-1
   ament_lint/ament_cmake_lint_cmake:
     type: git
     url: https://github.com/ros2-gbp/ament_lint-release.git
-    version: release/humble/ament_cmake_lint_cmake/0.12.5-1
+    version: release/humble/ament_cmake_lint_cmake/0.12.8-1
   ament_lint/ament_cmake_pep257:
     type: git
     url: https://github.com/ros2-gbp/ament_lint-release.git
-    version: release/humble/ament_cmake_pep257/0.12.5-1
+    version: release/humble/ament_cmake_pep257/0.12.8-1
   ament_lint/ament_cmake_uncrustify:
     type: git
     url: https://github.com/ros2-gbp/ament_lint-release.git
-    version: release/humble/ament_cmake_uncrustify/0.12.5-1
+    version: release/humble/ament_cmake_uncrustify/0.12.8-1
   ament_lint/ament_cmake_xmllint:
     type: git
     url: https://github.com/ros2-gbp/ament_lint-release.git
-    version: release/humble/ament_cmake_xmllint/0.12.5-1
+    version: release/humble/ament_cmake_xmllint/0.12.8-1
   ament_lint/ament_copyright:
     type: git
     url: https://github.com/ros2-gbp/ament_lint-release.git
-    version: release/humble/ament_copyright/0.12.5-1
+    version: release/humble/ament_copyright/0.12.8-1
   ament_lint/ament_cppcheck:
     type: git
     url: https://github.com/ros2-gbp/ament_lint-release.git
-    version: release/humble/ament_cppcheck/0.12.5-1
+    version: release/humble/ament_cppcheck/0.12.8-1
   ament_lint/ament_cpplint:
     type: git
     url: https://github.com/ros2-gbp/ament_lint-release.git
-    version: release/humble/ament_cpplint/0.12.5-1
+    version: release/humble/ament_cpplint/0.12.8-1
   ament_lint/ament_flake8:
     type: git
     url: https://github.com/ros2-gbp/ament_lint-release.git
-    version: release/humble/ament_flake8/0.12.5-1
+    version: release/humble/ament_flake8/0.12.8-1
   ament_lint/ament_lint:
     type: git
     url: https://github.com/ros2-gbp/ament_lint-release.git
-    version: release/humble/ament_lint/0.12.5-1
+    version: release/humble/ament_lint/0.12.8-1
   ament_lint/ament_lint_auto:
     type: git
     url: https://github.com/ros2-gbp/ament_lint-release.git
-    version: release/humble/ament_lint_auto/0.12.5-1
+    version: release/humble/ament_lint_auto/0.12.8-1
   ament_lint/ament_lint_cmake:
     type: git
     url: https://github.com/ros2-gbp/ament_lint-release.git
-    version: release/humble/ament_lint_cmake/0.12.5-1
+    version: release/humble/ament_lint_cmake/0.12.8-1
   ament_lint/ament_lint_common:
     type: git
     url: https://github.com/ros2-gbp/ament_lint-release.git
-    version: release/humble/ament_lint_common/0.12.5-1
+    version: release/humble/ament_lint_common/0.12.8-1
   ament_lint/ament_mypy:
     type: git
     url: https://github.com/ros2-gbp/ament_lint-release.git
-    version: release/humble/ament_mypy/0.12.5-1
+    version: release/humble/ament_mypy/0.12.8-1
   ament_lint/ament_pep257:
     type: git
     url: https://github.com/ros2-gbp/ament_lint-release.git
-    version: release/humble/ament_pep257/0.12.5-1
+    version: release/humble/ament_pep257/0.12.8-1
   ament_lint/ament_pycodestyle:
     type: git
     url: https://github.com/ros2-gbp/ament_lint-release.git
-    version: release/humble/ament_pycodestyle/0.12.5-1
+    version: release/humble/ament_pycodestyle/0.12.8-1
   ament_lint/ament_uncrustify:
     type: git
     url: https://github.com/ros2-gbp/ament_lint-release.git
-    version: release/humble/ament_uncrustify/0.12.5-1
+    version: release/humble/ament_uncrustify/0.12.8-1
   ament_lint/ament_xmllint:
     type: git
     url: https://github.com/ros2-gbp/ament_lint-release.git
-    version: release/humble/ament_xmllint/0.12.5-1
+    version: release/humble/ament_xmllint/0.12.8-1
   ament_package:
     type: git
     url: https://github.com/ros2-gbp/ament_package-release.git
@@ -191,14 +191,10 @@ repositories:
     type: git
     url: https://github.com/ros2-gbp/angles-release.git
     version: release/humble/angles/1.15.0-1
-  apriltag:
-    type: git
-    url: https://github.com/ros2-gbp/apriltag-release.git
-    version: release/humble/apriltag/3.2.0-2
   behaviortree_cpp_v3:
     type: git
     url: https://github.com/BehaviorTree/behaviortree_cpp_v3-release.git
-    version: release/humble/behaviortree_cpp_v3/3.8.3-2
+    version: release/humble/behaviortree_cpp_v3/3.8.5-1
   class_loader:
     type: git
     url: https://github.com/ros2-gbp/class_loader-release.git
@@ -262,15 +258,15 @@ repositories:
   control_msgs:
     type: git
     url: https://github.com/ros2-gbp/control_msgs-release.git
-    version: release/humble/control_msgs/4.1.1-1
+    version: release/humble/control_msgs/4.4.0-1
   control_toolbox:
     type: git
     url: https://github.com/ros2-gbp/control_toolbox-release.git
-    version: release/humble/control_toolbox/3.0.0-1
+    version: release/humble/control_toolbox/3.1.0-1
   cyclonedds:
     type: git
     url: https://github.com/ros2-gbp/cyclonedds-release.git
-    version: release/humble/cyclonedds/0.9.1-1
+    version: release/humble/cyclonedds/0.10.3-1
   demos/action_tutorials_cpp:
     type: git
     url: https://github.com/ros2-gbp/demos-release.git
@@ -306,7 +302,7 @@ repositories:
   depthimage_to_laserscan:
     type: git
     url: https://github.com/ros2-gbp/depthimage_to_laserscan-release.git
-    version: release/humble/depthimage_to_laserscan/2.5.0-3
+    version: release/humble/depthimage_to_laserscan/2.5.1-1
   diagnostics/diagnostic_aggregator:
     type: git
     url: https://github.com/ros2-gbp/diagnostics-release.git
@@ -330,7 +326,7 @@ repositories:
   fastrtps:
     type: git
     url: https://github.com/ros2-gbp/fastrtps-release.git
-    version: release/humble/fastrtps/2.6.4-1
+    version: release/humble/fastrtps/2.6.6-1
   foonathan_memory_vendor:
     type: git
     url: https://github.com/ros2-gbp/foonathan_memory_vendor-release.git
@@ -338,63 +334,63 @@ repositories:
   geographic_info/geographic_msgs:
     type: git
     url: https://github.com/ros2-gbp/geographic_info-release.git
-    version: release/humble/geographic_msgs/1.0.4-6
+    version: release/humble/geographic_msgs/1.0.5-1
   geometry2/geometry2:
     type: git
     url: https://github.com/ros2-gbp/geometry2-release.git
-    version: release/humble/geometry2/0.25.2-1
+    version: release/humble/geometry2/0.25.4-1
   geometry2/tf2:
     type: git
     url: https://github.com/ros2-gbp/geometry2-release.git
-    version: release/humble/tf2/0.25.2-1
+    version: release/humble/tf2/0.25.4-1
   geometry2/tf2_bullet:
     type: git
     url: https://github.com/ros2-gbp/geometry2-release.git
-    version: release/humble/tf2_bullet/0.25.2-1
+    version: release/humble/tf2_bullet/0.25.4-1
   geometry2/tf2_eigen:
     type: git
     url: https://github.com/ros2-gbp/geometry2-release.git
-    version: release/humble/tf2_eigen/0.25.2-1
+    version: release/humble/tf2_eigen/0.25.4-1
   geometry2/tf2_eigen_kdl:
     type: git
     url: https://github.com/ros2-gbp/geometry2-release.git
-    version: release/humble/tf2_eigen_kdl/0.25.2-1
+    version: release/humble/tf2_eigen_kdl/0.25.4-1
   geometry2/tf2_geometry_msgs:
     type: git
     url: https://github.com/ros2-gbp/geometry2-release.git
-    version: release/humble/tf2_geometry_msgs/0.25.2-1
+    version: release/humble/tf2_geometry_msgs/0.25.4-1
   geometry2/tf2_kdl:
     type: git
     url: https://github.com/ros2-gbp/geometry2-release.git
-    version: release/humble/tf2_kdl/0.25.2-1
+    version: release/humble/tf2_kdl/0.25.4-1
   geometry2/tf2_msgs:
     type: git
     url: https://github.com/ros2-gbp/geometry2-release.git
-    version: release/humble/tf2_msgs/0.25.2-1
+    version: release/humble/tf2_msgs/0.25.4-1
   geometry2/tf2_py:
     type: git
     url: https://github.com/ros2-gbp/geometry2-release.git
-    version: release/humble/tf2_py/0.25.2-1
+    version: release/humble/tf2_py/0.25.4-1
   geometry2/tf2_ros:
     type: git
     url: https://github.com/ros2-gbp/geometry2-release.git
-    version: release/humble/tf2_ros/0.25.2-1
+    version: release/humble/tf2_ros/0.25.4-1
   geometry2/tf2_ros_py:
     type: git
     url: https://github.com/ros2-gbp/geometry2-release.git
-    version: release/humble/tf2_ros_py/0.25.2-1
+    version: release/humble/tf2_ros_py/0.25.4-1
   geometry2/tf2_sensor_msgs:
     type: git
     url: https://github.com/ros2-gbp/geometry2-release.git
-    version: release/humble/tf2_sensor_msgs/0.25.2-1
+    version: release/humble/tf2_sensor_msgs/0.25.4-1
   geometry2/tf2_tools:
     type: git
     url: https://github.com/ros2-gbp/geometry2-release.git
-    version: release/humble/tf2_tools/0.25.2-1
+    version: release/humble/tf2_tools/0.25.4-1
   google_benchmark_vendor:
     type: git
     url: https://github.com/ros2-gbp/google_benchmark_vendor-release.git
-    version: release/humble/google_benchmark_vendor/0.1.1-2
+    version: release/humble/google_benchmark_vendor/0.1.2-1
   googletest/gmock_vendor:
     type: git
     url: https://github.com/ros2-gbp/googletest-release.git
@@ -418,15 +414,15 @@ repositories:
   image_common/camera_calibration_parsers:
     type: git
     url: https://github.com/ros2-gbp/image_common-release.git
-    version: release/humble/camera_calibration_parsers/3.1.5-1
+    version: release/humble/camera_calibration_parsers/3.1.7-1
   image_common/camera_info_manager:
     type: git
     url: https://github.com/ros2-gbp/image_common-release.git
-    version: release/humble/camera_info_manager/3.1.5-1
+    version: release/humble/camera_info_manager/3.1.7-1
   image_common/image_transport:
     type: git
     url: https://github.com/ros2-gbp/image_common-release.git
-    version: release/humble/image_transport/3.1.5-1
+    version: release/humble/image_transport/3.1.7-1
   image_pipeline/image_proc:
     type: git
     url: https://github.com/ros2-gbp/image_pipeline-release.git
@@ -462,15 +458,15 @@ repositories:
   joint_state_publisher/joint_state_publisher:
     type: git
     url: https://github.com/ros2-gbp/joint_state_publisher-release.git
-    version: release/humble/joint_state_publisher/2.3.0-1
+    version: release/humble/joint_state_publisher/2.4.0-1
   joystick_drivers/joy:
     type: git
     url: https://github.com/ros2-gbp/joystick_drivers-release.git
-    version: release/humble/joy/3.1.0-3
+    version: release/humble/joy/3.3.0-1
   joystick_drivers/sdl2_vendor:
     type: git
     url: https://github.com/ros2-gbp/joystick_drivers-release.git
-    version: release/humble/sdl2_vendor/3.1.0-3
+    version: release/humble/sdl2_vendor/3.3.0-1
   kdl_parser:
     type: git
     url: https://github.com/ros2-gbp/kdl_parser-release.git
@@ -506,15 +502,15 @@ repositories:
   launch_ros/launch_ros:
     type: git
     url: https://github.com/ros2-gbp/launch_ros-release.git
-    version: release/humble/launch_ros/0.19.4-1
+    version: release/humble/launch_ros/0.19.6-1
   launch_ros/launch_testing_ros:
     type: git
     url: https://github.com/ros2-gbp/launch_ros-release.git
-    version: release/humble/launch_testing_ros/0.19.4-1
+    version: release/humble/launch_testing_ros/0.19.6-1
   launch_ros/ros2launch:
     type: git
     url: https://github.com/ros2-gbp/launch_ros-release.git
-    version: release/humble/ros2launch/0.19.4-1
+    version: release/humble/ros2launch/0.19.6-1
   libstatistics_collector:
     type: git
     url: https://github.com/ros2-gbp/libstatistics_collector-release.git
@@ -530,7 +526,7 @@ repositories:
   message_filters:
     type: git
     url: https://github.com/ros2-gbp/ros2_message_filters-release.git
-    version: release/humble/message_filters/4.3.2-1
+    version: release/humble/message_filters/4.3.3-2
   mimick_vendor:
     type: git
     url: https://github.com/ros2-gbp/mimick_vendor-release.git
@@ -574,19 +570,19 @@ repositories:
   rcl/rcl:
     type: git
     url: https://github.com/ros2-gbp/rcl-release.git
-    version: release/humble/rcl/5.3.2-1
+    version: release/humble/rcl/5.3.5-1
   rcl/rcl_action:
     type: git
     url: https://github.com/ros2-gbp/rcl-release.git
-    version: release/humble/rcl_action/5.3.2-1
+    version: release/humble/rcl_action/5.3.5-1
   rcl/rcl_lifecycle:
     type: git
     url: https://github.com/ros2-gbp/rcl-release.git
-    version: release/humble/rcl_lifecycle/5.3.2-1
+    version: release/humble/rcl_lifecycle/5.3.5-1
   rcl/rcl_yaml_param_parser:
     type: git
     url: https://github.com/ros2-gbp/rcl-release.git
-    version: release/humble/rcl_yaml_param_parser/5.3.2-1
+    version: release/humble/rcl_yaml_param_parser/5.3.5-1
   rcl_interfaces/action_msgs:
     type: git
     url: https://github.com/ros2-gbp/rcl_interfaces-release.git
@@ -630,31 +626,31 @@ repositories:
   rclcpp/rclcpp:
     type: git
     url: https://github.com/ros2-gbp/rclcpp-release.git
-    version: release/humble/rclcpp/16.0.3-1
+    version: release/humble/rclcpp/16.0.6-1
   rclcpp/rclcpp_action:
     type: git
     url: https://github.com/ros2-gbp/rclcpp-release.git
-    version: release/humble/rclcpp_action/16.0.3-1
+    version: release/humble/rclcpp_action/16.0.6-1
   rclcpp/rclcpp_components:
     type: git
     url: https://github.com/ros2-gbp/rclcpp-release.git
-    version: release/humble/rclcpp_components/16.0.3-1
+    version: release/humble/rclcpp_components/16.0.6-1
   rclcpp/rclcpp_lifecycle:
     type: git
     url: https://github.com/ros2-gbp/rclcpp-release.git
-    version: release/humble/rclcpp_lifecycle/16.0.3-1
+    version: release/humble/rclcpp_lifecycle/16.0.6-1
   rclpy:
     type: git
     url: https://github.com/ros2-gbp/rclpy-release.git
-    version: release/humble/rclpy/3.3.7-1
+    version: release/humble/rclpy/3.3.10-1
   rcpputils:
     type: git
     url: https://github.com/ros2-gbp/rcpputils-release.git
-    version: release/humble/rcpputils/2.4.0-2
+    version: release/humble/rcpputils/2.4.1-1
   rcutils:
     type: git
     url: https://github.com/ros2-gbp/rcutils-release.git
-    version: release/humble/rcutils/5.1.2-1
+    version: release/humble/rcutils/5.1.3-1
   realtime_support/rttest:
     type: git
     url: https://github.com/ros2-gbp/realtime_support-release.git
@@ -686,15 +682,15 @@ repositories:
   rmw_connextdds/rmw_connextdds:
     type: git
     url: https://github.com/ros2-gbp/rmw_connextdds-release.git
-    version: release/humble/rmw_connextdds/0.11.1-2
+    version: release/humble/rmw_connextdds/0.11.2-1
   rmw_connextdds/rmw_connextdds_common:
     type: git
     url: https://github.com/ros2-gbp/rmw_connextdds-release.git
-    version: release/humble/rmw_connextdds_common/0.11.1-2
+    version: release/humble/rmw_connextdds_common/0.11.2-1
   rmw_connextdds/rti_connext_dds_cmake_module:
     type: git
     url: https://github.com/ros2-gbp/rmw_connextdds-release.git
-    version: release/humble/rti_connext_dds_cmake_module/0.11.1-2
+    version: release/humble/rti_connext_dds_cmake_module/0.11.2-1
   rmw_cyclonedds_cpp:
     type: git
     url: https://github.com/ros2-gbp/rmw_cyclonedds-release.git
@@ -706,15 +702,15 @@ repositories:
   rmw_fastrtps/rmw_fastrtps_cpp:
     type: git
     url: https://github.com/ros2-gbp/rmw_fastrtps-release.git
-    version: release/humble/rmw_fastrtps_cpp/6.2.2-1
+    version: release/humble/rmw_fastrtps_cpp/6.2.4-1
   rmw_fastrtps/rmw_fastrtps_dynamic_cpp:
     type: git
     url: https://github.com/ros2-gbp/rmw_fastrtps-release.git
-    version: release/humble/rmw_fastrtps_dynamic_cpp/6.2.2-1
+    version: release/humble/rmw_fastrtps_dynamic_cpp/6.2.4-1
   rmw_fastrtps/rmw_fastrtps_shared_cpp:
     type: git
     url: https://github.com/ros2-gbp/rmw_fastrtps-release.git
-    version: release/humble/rmw_fastrtps_shared_cpp/6.2.2-1
+    version: release/humble/rmw_fastrtps_shared_cpp/6.2.4-1
   rmw_implementation:
     type: git
     url: https://github.com/ros2-gbp/rmw_implementation-release.git
@@ -722,7 +718,7 @@ repositories:
   robot_localization:
     type: git
     url: https://github.com/ros2-gbp/robot_localization-release.git
-    version: release/humble/robot_localization/3.5.0-1
+    version: release/humble/robot_localization/3.5.1-2
   robot_state_publisher:
     type: git
     url: https://github.com/ros2-gbp/robot_state_publisher-release.git
@@ -734,63 +730,63 @@ repositories:
   ros2cli/ros2action:
     type: git
     url: https://github.com/ros2-gbp/ros2cli-release.git
-    version: release/humble/ros2action/0.18.5-1
+    version: release/humble/ros2action/0.18.7-1
   ros2cli/ros2cli:
     type: git
     url: https://github.com/ros2-gbp/ros2cli-release.git
-    version: release/humble/ros2cli/0.18.5-1
+    version: release/humble/ros2cli/0.18.7-1
   ros2cli/ros2cli_test_interfaces:
     type: git
     url: https://github.com/ros2-gbp/ros2cli-release.git
-    version: release/humble/ros2cli_test_interfaces/0.18.5-1
+    version: release/humble/ros2cli_test_interfaces/0.18.7-1
   ros2cli/ros2component:
     type: git
     url: https://github.com/ros2-gbp/ros2cli-release.git
-    version: release/humble/ros2component/0.18.5-1
+    version: release/humble/ros2component/0.18.7-1
   ros2cli/ros2doctor:
     type: git
     url: https://github.com/ros2-gbp/ros2cli-release.git
-    version: release/humble/ros2doctor/0.18.5-1
+    version: release/humble/ros2doctor/0.18.7-1
   ros2cli/ros2interface:
     type: git
     url: https://github.com/ros2-gbp/ros2cli-release.git
-    version: release/humble/ros2interface/0.18.5-1
+    version: release/humble/ros2interface/0.18.7-1
   ros2cli/ros2lifecycle:
     type: git
     url: https://github.com/ros2-gbp/ros2cli-release.git
-    version: release/humble/ros2lifecycle/0.18.5-1
+    version: release/humble/ros2lifecycle/0.18.7-1
   ros2cli/ros2lifecycle_test_fixtures:
     type: git
     url: https://github.com/ros2-gbp/ros2cli-release.git
-    version: release/humble/ros2lifecycle_test_fixtures/0.18.5-1
+    version: release/humble/ros2lifecycle_test_fixtures/0.18.7-1
   ros2cli/ros2multicast:
     type: git
     url: https://github.com/ros2-gbp/ros2cli-release.git
-    version: release/humble/ros2multicast/0.18.5-1
+    version: release/humble/ros2multicast/0.18.7-1
   ros2cli/ros2node:
     type: git
     url: https://github.com/ros2-gbp/ros2cli-release.git
-    version: release/humble/ros2node/0.18.5-1
+    version: release/humble/ros2node/0.18.7-1
   ros2cli/ros2param:
     type: git
     url: https://github.com/ros2-gbp/ros2cli-release.git
-    version: release/humble/ros2param/0.18.5-1
+    version: release/humble/ros2param/0.18.7-1
   ros2cli/ros2pkg:
     type: git
     url: https://github.com/ros2-gbp/ros2cli-release.git
-    version: release/humble/ros2pkg/0.18.5-1
+    version: release/humble/ros2pkg/0.18.7-1
   ros2cli/ros2run:
     type: git
     url: https://github.com/ros2-gbp/ros2cli-release.git
-    version: release/humble/ros2run/0.18.5-1
+    version: release/humble/ros2run/0.18.7-1
   ros2cli/ros2service:
     type: git
     url: https://github.com/ros2-gbp/ros2cli-release.git
-    version: release/humble/ros2service/0.18.5-1
+    version: release/humble/ros2service/0.18.7-1
   ros2cli/ros2topic:
     type: git
     url: https://github.com/ros2-gbp/ros2cli-release.git
-    version: release/humble/ros2topic/0.18.5-1
+    version: release/humble/ros2topic/0.18.7-1
   ros2cli_common_extensions:
     type: git
     url: https://github.com/ros2-gbp/ros2cli_common_extensions-release.git
@@ -814,107 +810,107 @@ repositories:
   rosbag2/ros2bag:
     type: git
     url: https://github.com/ros2-gbp/rosbag2-release.git
-    version: release/humble/ros2bag/0.15.4-2
+    version: release/humble/ros2bag/0.15.8-1
   rosbag2/rosbag2:
     type: git
     url: https://github.com/ros2-gbp/rosbag2-release.git
-    version: release/humble/rosbag2/0.15.4-2
+    version: release/humble/rosbag2/0.15.8-1
   rosbag2/rosbag2_compression:
     type: git
     url: https://github.com/ros2-gbp/rosbag2-release.git
-    version: release/humble/rosbag2_compression/0.15.4-2
+    version: release/humble/rosbag2_compression/0.15.8-1
   rosbag2/rosbag2_compression_zstd:
     type: git
     url: https://github.com/ros2-gbp/rosbag2-release.git
-    version: release/humble/rosbag2_compression_zstd/0.15.4-2
+    version: release/humble/rosbag2_compression_zstd/0.15.8-1
   rosbag2/rosbag2_cpp:
     type: git
     url: https://github.com/ros2-gbp/rosbag2-release.git
-    version: release/humble/rosbag2_cpp/0.15.4-2
+    version: release/humble/rosbag2_cpp/0.15.8-1
   rosbag2/rosbag2_interfaces:
     type: git
     url: https://github.com/ros2-gbp/rosbag2-release.git
-    version: release/humble/rosbag2_interfaces/0.15.4-2
+    version: release/humble/rosbag2_interfaces/0.15.8-1
   rosbag2/rosbag2_py:
     type: git
     url: https://github.com/ros2-gbp/rosbag2-release.git
-    version: release/humble/rosbag2_py/0.15.4-2
+    version: release/humble/rosbag2_py/0.15.8-1
   rosbag2/rosbag2_storage:
     type: git
     url: https://github.com/ros2-gbp/rosbag2-release.git
-    version: release/humble/rosbag2_storage/0.15.4-2
+    version: release/humble/rosbag2_storage/0.15.8-1
   rosbag2/rosbag2_storage_default_plugins:
     type: git
     url: https://github.com/ros2-gbp/rosbag2-release.git
-    version: release/humble/rosbag2_storage_default_plugins/0.15.4-2
+    version: release/humble/rosbag2_storage_default_plugins/0.15.8-1
   rosbag2/rosbag2_test_common:
     type: git
     url: https://github.com/ros2-gbp/rosbag2-release.git
-    version: release/humble/rosbag2_test_common/0.15.4-2
+    version: release/humble/rosbag2_test_common/0.15.8-1
   rosbag2/rosbag2_tests:
     type: git
     url: https://github.com/ros2-gbp/rosbag2-release.git
-    version: release/humble/rosbag2_tests/0.15.4-2
+    version: release/humble/rosbag2_tests/0.15.8-1
   rosbag2/rosbag2_transport:
     type: git
     url: https://github.com/ros2-gbp/rosbag2-release.git
-    version: release/humble/rosbag2_transport/0.15.4-2
+    version: release/humble/rosbag2_transport/0.15.8-1
   rosbag2/shared_queues_vendor:
     type: git
     url: https://github.com/ros2-gbp/rosbag2-release.git
-    version: release/humble/shared_queues_vendor/0.15.4-2
+    version: release/humble/shared_queues_vendor/0.15.8-1
   rosbag2/sqlite3_vendor:
     type: git
     url: https://github.com/ros2-gbp/rosbag2-release.git
-    version: release/humble/sqlite3_vendor/0.15.4-2
+    version: release/humble/sqlite3_vendor/0.15.8-1
   rosbag2/zstd_vendor:
     type: git
     url: https://github.com/ros2-gbp/rosbag2-release.git
-    version: release/humble/zstd_vendor/0.15.4-2
+    version: release/humble/zstd_vendor/0.15.8-1
   rosidl/rosidl_adapter:
     type: git
     url: https://github.com/ros2-gbp/rosidl-release.git
-    version: release/humble/rosidl_adapter/3.1.4-1
+    version: release/humble/rosidl_adapter/3.1.5-2
   rosidl/rosidl_cli:
     type: git
     url: https://github.com/ros2-gbp/rosidl-release.git
-    version: release/humble/rosidl_cli/3.1.4-1
+    version: release/humble/rosidl_cli/3.1.5-2
   rosidl/rosidl_cmake:
     type: git
     url: https://github.com/ros2-gbp/rosidl-release.git
-    version: release/humble/rosidl_cmake/3.1.4-1
+    version: release/humble/rosidl_cmake/3.1.5-2
   rosidl/rosidl_generator_c:
     type: git
     url: https://github.com/ros2-gbp/rosidl-release.git
-    version: release/humble/rosidl_generator_c/3.1.4-1
+    version: release/humble/rosidl_generator_c/3.1.5-2
   rosidl/rosidl_generator_cpp:
     type: git
     url: https://github.com/ros2-gbp/rosidl-release.git
-    version: release/humble/rosidl_generator_cpp/3.1.4-1
+    version: release/humble/rosidl_generator_cpp/3.1.5-2
   rosidl/rosidl_parser:
     type: git
     url: https://github.com/ros2-gbp/rosidl-release.git
-    version: release/humble/rosidl_parser/3.1.4-1
+    version: release/humble/rosidl_parser/3.1.5-2
   rosidl/rosidl_runtime_c:
     type: git
     url: https://github.com/ros2-gbp/rosidl-release.git
-    version: release/humble/rosidl_runtime_c/3.1.4-1
+    version: release/humble/rosidl_runtime_c/3.1.5-2
   rosidl/rosidl_runtime_cpp:
     type: git
     url: https://github.com/ros2-gbp/rosidl-release.git
-    version: release/humble/rosidl_runtime_cpp/3.1.4-1
+    version: release/humble/rosidl_runtime_cpp/3.1.5-2
   rosidl/rosidl_typesupport_interface:
     type: git
     url: https://github.com/ros2-gbp/rosidl-release.git
-    version: release/humble/rosidl_typesupport_interface/3.1.4-1
+    version: release/humble/rosidl_typesupport_interface/3.1.5-2
   rosidl/rosidl_typesupport_introspection_c:
     type: git
     url: https://github.com/ros2-gbp/rosidl-release.git
-    version: release/humble/rosidl_typesupport_introspection_c/3.1.4-1
+    version: release/humble/rosidl_typesupport_introspection_c/3.1.5-2
   rosidl/rosidl_typesupport_introspection_cpp:
     type: git
     url: https://github.com/ros2-gbp/rosidl-release.git
-    version: release/humble/rosidl_typesupport_introspection_cpp/3.1.4-1
+    version: release/humble/rosidl_typesupport_introspection_cpp/3.1.5-2
   rosidl_defaults/rosidl_default_generators:
     type: git
     url: https://github.com/ros2-gbp/rosidl_defaults-release.git
@@ -934,23 +930,23 @@ repositories:
   rosidl_typesupport/rosidl_typesupport_c:
     type: git
     url: https://github.com/ros2-gbp/rosidl_typesupport-release.git
-    version: release/humble/rosidl_typesupport_c/2.0.0-2
+    version: release/humble/rosidl_typesupport_c/2.0.1-1
   rosidl_typesupport/rosidl_typesupport_cpp:
     type: git
     url: https://github.com/ros2-gbp/rosidl_typesupport-release.git
-    version: release/humble/rosidl_typesupport_cpp/2.0.0-2
+    version: release/humble/rosidl_typesupport_cpp/2.0.1-1
   rosidl_typesupport_fastrtps/fastrtps_cmake_module:
     type: git
     url: https://github.com/ros2-gbp/rosidl_typesupport_fastrtps-release.git
-    version: release/humble/fastrtps_cmake_module/2.2.0-2
+    version: release/humble/fastrtps_cmake_module/2.2.1-1
   rosidl_typesupport_fastrtps/rosidl_typesupport_fastrtps_c:
     type: git
     url: https://github.com/ros2-gbp/rosidl_typesupport_fastrtps-release.git
-    version: release/humble/rosidl_typesupport_fastrtps_c/2.2.0-2
+    version: release/humble/rosidl_typesupport_fastrtps_c/2.2.1-1
   rosidl_typesupport_fastrtps/rosidl_typesupport_fastrtps_cpp:
     type: git
     url: https://github.com/ros2-gbp/rosidl_typesupport_fastrtps-release.git
-    version: release/humble/rosidl_typesupport_fastrtps_cpp/2.2.0-2
+    version: release/humble/rosidl_typesupport_fastrtps_cpp/2.2.1-1
   rpyutils:
     type: git
     url: https://github.com/ros2-gbp/rpyutils-release.git
@@ -974,7 +970,7 @@ repositories:
   teleop_twist_joy:
     type: git
     url: https://github.com/ros2-gbp/teleop_twist_joy-release.git
-    version: release/humble/teleop_twist_joy/2.4.3-4
+    version: release/humble/teleop_twist_joy/2.4.5-1
   teleop_twist_keyboard:
     type: git
     url: https://github.com/ros2-gbp/teleop_twist_keyboard-release.git
@@ -1043,10 +1039,6 @@ repositories:
     type: git
     url: https://github.com/ros2-gbp/yaml_cpp_vendor-release.git
     version: release/humble/yaml_cpp_vendor/8.0.2-1
-  uros/micro_ros_msgs:
-    type: git
-    url: https://github.com/micro-ROS/micro_ros_msgs
-    version: humble
   uros/micro_ros_agent:
     type: git
     url: https://github.com/micro-ROS/micro-ROS-Agent
@@ -1055,3 +1047,7 @@ repositories:
     type: git
     url: https://github.com/rjp5th/Micro-XRCE-DDS-Agent
     version: can-support
+  uros/micro_ros_msgs:
+    type: git
+    url: https://github.com/micro-ROS/micro_ros_msgs
+    version: humble
