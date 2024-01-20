@@ -168,7 +168,7 @@ def target_configuration(settings: dict):
     print("\nConfiguring JetPack settings on target:")
     scriptRun = os.path.join("~", "scripts", "config_target", "configure_jetpack.bash")
     remIP = settings["target_ip"]
-    remoteExec(f"/bin/bash {scriptRun} {remIP}", username, target)
+    remoteExec(f"/bin/bash {scriptRun} {remIP}", username, target, root=True)
 
     print('''
     Please enable the primary and external can busses on the target with the following command.
