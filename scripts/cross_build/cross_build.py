@@ -1,6 +1,6 @@
 #! /bin/python3
 
-import os, stat, hashlib, json, tarfile, getpass, yaml
+import os, stat, hashlib, json, tarfile, getpass, yaml, shutil
 from time import sleep
 import argparse
 from subprocess import Popen, PIPE, STDOUT
@@ -244,7 +244,10 @@ def checkout_sources(settings: dict):
         
     # either the old hash isnt there, or they dont match
     else:
-        print("Meta source files differ, pulling sources")
+        print("Meta source files differ or clean requested, pulling sources")
+
+        shutil.rmtree(crossSrcs)
+        os.mkdir(crossSrcs)
 
         # run the vcs clone
         exitCode, _ = execute(["vcs", "import", crossSrcs, "--input", os.path.join(settings["cross_dir"], "meta.repos"), "--shallow"], False)
