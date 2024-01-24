@@ -16,10 +16,6 @@
 [submodule "src/riptide_perception"]
 	path = src/riptide_perception
 	url = https://github.com/osu-uwrt/riptide_perception
-[submodule "src/vectornav"]
-	path = src/vectornav
-	url = https://github.com/osu-uwrt/vectornav
-	branch = ros2
 [submodule "src/chameleon_tf"]
 	path = src/chameleon_tf
 	url = https://github.com/coalman321/chameleon_tf
