@@ -53,7 +53,7 @@ ros2 action send_goal /talos/map/model_tf chameleon_tf_msgs/action/ModelFrame -f
 
 Command to calibrate the IMU
 ```
-ros2 action send_goal /talos/vectornav/mag_cal vectornav_msgs/action/MagCal -f
+ros2 action send_goal /talos/vectornav/mag_cal riptide_msgs2/action/MagCal -f
 ```
 
 check for connected tf trees: 
