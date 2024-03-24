@@ -1045,9 +1045,13 @@ repositories:
     version: humble
   uros/micro_xrce_dds_agent:
     type: git
-    url: https://github.com/rjp5th/Micro-XRCE-DDS-Agent
+    url: https://github.com/osu-uwrt/Micro-XRCE-DDS-Agent
     version: can-support
   uros/micro_ros_msgs:
     type: git
     url: https://github.com/micro-ROS/micro_ros_msgs
     version: humble
+  uros/titan_canmore:
+      type: git
+      url: https://github.com/osu-uwrt/titan_canmore
+      version: master
