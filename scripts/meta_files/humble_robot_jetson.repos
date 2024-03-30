@@ -423,18 +423,6 @@ repositories:
     type: git
     url: https://github.com/ros2-gbp/image_common-release.git
     version: release/humble/image_transport/3.1.7-1
-  image_pipeline/image_proc:
-    type: git
-    url: https://github.com/ros2-gbp/image_pipeline-release.git
-    version: release/humble/image_proc/3.0.0-1
-  image_pipeline/image_publisher:
-    type: git
-    url: https://github.com/ros2-gbp/image_pipeline-release.git
-    version: release/humble/image_publisher/3.0.0-1
-  image_pipeline/tracetools_image_pipeline:
-    type: git
-    url: https://github.com/ros2-gbp/image_pipeline-release.git
-    version: release/humble/tracetools_image_pipeline/3.0.0-1
   image_transport_plugins/compressed_depth_image_transport:
     type: git
     url: https://github.com/ros2-gbp/image_transport_plugins-release.git
@@ -1055,3 +1043,16 @@ repositories:
       type: git
       url: https://github.com/osu-uwrt/titan_canmore
       version: master
+  image_pipeline:
+      type: git
+      url: https://github.com/ros-perception/image_pipeline
+      version: humble
+  nmea_msgs:
+      type: git
+      url: https://github.com/ros-drivers/nmea_msgs
+      version: ros2
+  apriltag:
+      type: git
+      url: https://github.com/AprilRobotics/apriltag
+      version: master
+  
