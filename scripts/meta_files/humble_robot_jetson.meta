@@ -33,7 +33,8 @@
         },
         "fastrtps": {
             "cmake-args": [
-                "-DCOMPILE_TOOLS=OFF"
+                "-DCOMPILE_TOOLS=ON"
+                "-DFASTRTPS_STATISTICS=ON"
             ]
         },
         "micro_xrce_dds_agent": {
