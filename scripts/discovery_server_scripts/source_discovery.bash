@@ -21,6 +21,9 @@ function initialize_discovery {
         # No discovery host file exists, we aren't running as discovery server
         # Configure the environment appropriately
         alias ddshost="source $SCRIPT_DIR/enable_discovery_server.bash"
+        unset -f _python_argcomplete_ros2_wrapper
+        unset -f check_ddshost_ready
+        unset -f run_as_superclient
         if ! [ -z $ROS_DISCOVERY_SERVER ]; then
             unset ROS_DISCOVERY_SERVER
             unalias ros2 >/dev/null 2>/dev/null
@@ -55,6 +58,8 @@ function initialize_discovery {
 
     # Set all the aliases we need for this (and unset ddshost if we're realiasing)
     alias ros2="$SCRIPT_DIR/ros2_superclient_alias.bash"
+    alias rqt="run_as_superclient rqt"
+    alias rviz2="run_as_superclient rviz2"
     alias deactivate_ddshost="source $SCRIPT_DIR/disable_discovery_server.bash"
     unalias ddshost >/dev/null 2>/dev/null
     # Fix the ros2 tab complete to run as superclient
