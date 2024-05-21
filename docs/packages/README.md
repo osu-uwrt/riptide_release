@@ -8,10 +8,10 @@ The `package_name` package is part of the `project_name` and contains [brief des
 The common configuration for this package is specified in `config_file.yaml` and includes parameters used by the node.
 
 ### Configuration Parameters
-| Parameter Name   | Type   | Default        | Description                     |
-|------------------|--------|----------------|---------------------------------|
-| `parameter_name` | `type` | Default value. | Description of the parameter.   |
-| ...              | ...    | ...            | ...                             |
+| Parameter Name   | Type   | Default         | Description                     |
+|------------------|--------|-----------------|---------------------------------|
+| `parameter_name` | `type` | `default value` | Description of the parameter.   |
+| ...              | ...    | ...             | ...                             |
 
 ## Dependencies
 List all the dependencies required by the package.
