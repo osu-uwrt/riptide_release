@@ -13,14 +13,6 @@ The common configuration for this package is specified in `config_file.yaml` and
 | `parameter_name` | `type` | `default value` | Description of the parameter.   |
 | ...              | ...    | ...             | ...                             |
 
-## Dependencies
-List all the dependencies required by the package.
-
-### Dependencies List
-- `dependency1`
-- `dependency2`
-- ...
-
 ## Usage
 The node(s) in this package can be launched using either the centralized launch service or locally using specific commands.
 
@@ -44,11 +36,6 @@ To effectively diagnose and monitor the nodes in this package, use the following
 ## Troubleshooting
 ### Problem: Description of the problem
 - **Solution**: Steps to solve the problem.
-
-### Common Issues
-- **Issue 1**: Description and solution.
-- **Issue 2**: Description and solution.
-- ...
 
 ## Nodes
 
@@ -77,19 +64,22 @@ The `node_1_name` node [brief description of what it does].
 | `topic_name`        | `message_type`   | Description of the publisher.   |
 | ...                 | ...              | ...                             |
 
+**Published TF Frames**
+| Parent Frame        | Child Frame      | Description                          |
+|---------------------|------------------|--------------------------------------|
+| `parent_frame`      | `child_frame`    | Description of the transformation.   |
+| ...                 | ...              | ...                                  |
+
 #### Functional Description
 1. **Feature 1**: Description of the feature.
 2. **Feature 2**: Description of the feature.
 3. ...
 
-#### Data Flow
-- **Input**: Description of input data.
-- **Processing**: Description of processing steps.
-- **Output**: Description of output data.
-
 #### Key Functions and Classes
-- `function_name(parameters)`: Description of the function.
-- ...
+| Function/Class               | Description                     |
+|------------------------------|---------------------------------|
+| `function_name(parameters)`  | Description of the function.    |
+| ...                          | ...                             |
 
 ### Node 2 Name
 
@@ -116,15 +106,16 @@ The `node_2_name` node [brief description of what it does].
 | `topic_name`        | `message_type`   | Description of the publisher.   |
 | ...                 | ...              | ...                             |
 
+**Published TF Frames**
+| Parent Frame        | Child Frame      | Description                          |
+|---------------------|------------------|--------------------------------------|
+| `parent_frame`      | `child_frame`    | Description of the transformation.   |
+| ...                 | ...              | ...                                  |
+
 #### Functional Description
 1. **Feature 1**: Description of the feature.
 2. **Feature 2**: Description of the feature.
 3. ...
-
-#### Data Flow
-- **Input**: Description of input data.
-- **Processing**: Description of processing steps.
-- **Output**: Description of output data.
 
 #### Key Functions and Classes
 | Function/Class               | Description                     |
