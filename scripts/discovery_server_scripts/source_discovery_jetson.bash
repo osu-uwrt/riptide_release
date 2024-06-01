@@ -56,6 +56,11 @@ function initialize_discovery {
         return 1
     fi
 
+    if ! [[ $PS1 =~ "DDS Host: " ]]; then
+        # Only set PS1 if we don't have something in there already
+        PS1="\[\033[33m\](Discovery Server)\[\033[0m\] $PS1"
+    fi
+    
     return 0
 }
 
