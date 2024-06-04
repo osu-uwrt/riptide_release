@@ -64,6 +64,18 @@ The `node_1_name` node [brief description of what it does].
 | `topic_name`        | `message_type`   | Description of the publisher.   |
 | ...                 | ...              | ...                             |
 
+**Services**
+| Service Name        | Service Type     | Description                          |
+|---------------------|------------------|--------------------------------------|
+| `service_name`      | `service_type`   | Description of the service.          |
+| ...                 | ...              | ...                                  |
+
+**Actions**
+| Action Name         | Action Type      | Description                          |
+|---------------------|------------------|--------------------------------------|
+| `action_name`       | `action_type`    | Description of the action.           |
+| ...                 | ...              | ...                                  |
+
 **Published TF Frames**
 | Parent Frame        | Child Frame      | Description                          |
 |---------------------|------------------|--------------------------------------|
