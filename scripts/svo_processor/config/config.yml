@@ -1,0 +1,18 @@
+# Path to the ZED calibration file
+calib_file: "../config/ZED_cal.conf"
+
+# Directory containing the SVO files
+svo_dir: "../svos"
+
+# Directory to save the raw stereo videos converted from SVO
+stereo_dir: "../stereo_raw"
+
+# Directory to save the extracted unrectified left frames from stereo videos
+left_dir: "../left_raw"
+
+# Directory to save the rectified videos
+rectified_dir: "../left_rectified"
+
+# Boolean flag to determine whether to save the unrectified left frames separately
+save_left: False
+

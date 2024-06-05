@@ -1,0 +1,8 @@
+# Ignore video files
+*.avi
+*.mp4
+
+# Ignore any other unwanted files
+*.log
+*.tmp
+.DS_Store
