@@ -1,6 +1,6 @@
 #!/bin/python3
 
-import os, yaml, getpass, glob, argparse, time
+import os, yaml, getpass, glob, argparse, time, subprocess
 from posixpath import expanduser
 from fabric import Connection, Config
 from subprocess import Popen, PIPE, CalledProcessError, call
@@ -58,16 +58,21 @@ def config_menu():
     targetSel = select_menu(targets[0], "Remote Target")
     confDict["target_name"] = targets[0][targetSel]
     confDict["target_ip"] = targets[1][targetSel]
-
-    # scan for ROS installations availiable
-    tarballs = glob.glob(os.path.join(HOME_DIR, "Downloads", f"{ROS_DISTRO}*.tar.gz"))
-    if(len(tarballs) > 0):
-        print("If the desired ROS tarball is not found place it in this user's downloads directory\n(It must be a GZipped tar archive)")
-        tarSel = select_menu(tarballs, "ROS Tarball")
-        confDict["tarball_name"] = tarballs[tarSel]
+    
+    # ask for apt or tar install
+    wantApt = input("Perform apt install? (if no, will prompt you for tar install) [y/n]: ")
+    if(wantApt.lower().startswith("y")):
+        confDict["apt_distro"] = input("Enter the name of the ROS distro to install (e.g. humble): ")
     else:
-        print("No ROS tars found in users Downloads directory. Skipping tar install")
-        confDict["tarball_name"] = None
+        # scan for ROS installations availiable
+        tarballs = glob.glob(os.path.join(HOME_DIR, "Downloads", f"{ROS_DISTRO}*.tar.gz"))
+        if(len(tarballs) > 0):
+            print("If the desired ROS tarball is not found place it in this user's downloads directory\n(It must be a GZipped tar archive)")
+            tarSel = select_menu(tarballs, "ROS Tarball")
+            confDict["tarball_name"] = tarballs[tarSel]
+        else:
+            print("No ROS tars found in users Downloads directory. Skipping tar install")
+            confDict["tarball_name"] = None
 
     # query for remote login info
     print("Enter the remote username and password")
@@ -129,15 +134,11 @@ def connect_ssh(settings: dict):
     print("Transferring scripts to remote")
     xferDir(BASE_DIR, username, target, "~")
 
-    # if we have a tarball to transfer, do so
-    if(settings["tarball_name"] != None):
-        print("Transferring ROS Tar archive, this may take a moment")
-        xferSingleFile(settings["tarball_name"], username, target, "~")
-
 def target_configuration(settings: dict):
     username = settings["username"]
     target = settings["target_name"]
-    tarball = settings["tarball_name"]
+    tarball = settings["tarball_name"] if "tarball_name" in settings else None
+    classic = settings["apt_distro"] if "apt_distro" in settings else None # contains value of ros distro to install from apt
 
     # install dependencies
     if(not settings["skip_deps"]):
@@ -150,8 +151,16 @@ def target_configuration(settings: dict):
     scriptRun = os.path.join("~", "scripts", "unpack_install", "pytorch_install.bash")
     remoteExec(f"/bin/bash {scriptRun}", username, target)
 
-    # run the tar install
-    if(tarball):
+    # run the ros install
+    if(classic):
+        print(f"\nInstalling ROS {classic} from apt repositories")
+        scriptRun = os.path.join("~", "scripts", "unpack_install", "classic_ros_setup.bash")
+        remoteExec(f"/bin/bash {scriptRun} {classic}", username, target, root=True)
+    elif(tarball):
+        # if we have a tarball to transfer, do so
+        print("\nTransferring ROS Tar archive, this may take a moment")
+        xferSingleFile(settings["tarball_name"], username, target, "~")
+        
         print("Installing ROS tar")
         localTarPath = "~/" + tarball.split('/')[-1]
         scriptRun = os.path.join("~", "scripts", "unpack_install", f"install_tar.bash {ROS_DISTRO} {localTarPath}")
@@ -162,13 +171,28 @@ def target_configuration(settings: dict):
     # configure bashrc
     print("\nSetting up .bashrc")
     scriptRun = os.path.join("~", "scripts", "unpack_install", "setup_bashrc.bash")
-    remoteExec(f"/bin/bash {scriptRun}", username, target)
+    classicarg = "classic" if classic else "tar"
+    remoteExec(f"/bin/bash {scriptRun} {classicarg}", username, target)
 
     # configure JetPack settings
     print("\nConfiguring JetPack settings on target:")
     scriptRun = os.path.join("~", "scripts", "config_target", "configure_jetpack.bash")
     remIP = settings["target_ip"]
     remoteExec(f"/bin/bash {scriptRun} {remIP}", username, target, root=True)
+    
+    # configure colcon_deploy and install deps (necessary for classic install)
+    print("\nSyncing packages to target")
+    proc = subprocess.run(["colcon", "deploy", target, "--no_build"], cwd=os.path.join(os.path.dirname(__file__), ".."))
+    if(proc.returncode == 0):
+        print("Installing package dependencies")
+        remoteExec(f"rosdep install --from-paths colcon_deploy/src --ignore-src -r -y", username, target)
+    else:
+        print("An error occurred while sending packages to target. You will need to sync them and run rosdep manually.")
+        
+    # configure discovery server on target
+    print("\nInstalling and enabling discovery server")
+    scriptRun = os.path.join("~", "scripts", "discovery_server_scripts", "install_discovery_server.bash")
+    remoteExec(f"/bin/bash {scriptRun}", username, target, )
 
     print('''
     Please enable the primary and external can busses on the target with the following command.
@@ -243,7 +267,7 @@ def remoteExecResult(cmd, username, address, printOut=False, root=False, passwd=
         result = connect.run(cmd, hide=(not printOut))
         return (result.exited, str(result).rsplit("\n") if result else [])
 
-def remoteExec(cmd, username, address, printOut=False, root=False, passwd=""):
+def remoteExec(cmd, username, address, printOut=True, root=False, passwd=""):
     if root:
         connect = Connection(f"{username}@{address}", config=Config(overrides={"sudo": {"password": passwd}}))
         result = connect.sudo(cmd, hide=(not printOut))
@@ -284,8 +308,6 @@ def xferDir(localdir, username, address, destination):
 
 def runRemoteCmd(remoteScript, username, address):
     remoteExec(remoteScript, username, address, True)
-
-
 
 
 # main invoker

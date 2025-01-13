@@ -21,9 +21,6 @@ if [ ! "$ARCH" == *"aarch64"* ]; then
     rm /var/lib/nvfancontrol/status
     systemctl start nvfancontrol
 
-    echo "Disabling desktop"
-    systemctl set-default multi-user.target
-
     echo "Configuring CAN interfaces"
     # Remove the mttcan blacklist because NVIDIA
     rm /etc/modprobe.d/denylist-mttcan.conf
@@ -36,50 +33,62 @@ can_raw
 mttcan
 EOF
 
-    # Load in systemd-networkd scripts
-    cat > /etc/systemd/network/20-wired.network <<EOF
-# Static IP configuration for ethernet port
-# Sets the IP address for this computer
-[Match]
-Name=eth0
+#     # Load in systemd-networkd scripts
+#     cat > /etc/systemd/network/20-wired.network <<EOF
+# # Static IP configuration for ethernet port
+# # Sets the IP address for this computer
+# [Match]
+# Name=eth0
 
-[Network]
-Address=${DEVICE_IP}/24
-Gateway=192.168.1.1
-DNS=8.8.8.8 1.1.1.1
-EOF
+# [Network]
+# Address=${DEVICE_IP}/24
+# Gateway=192.168.1.1
+# DNS=8.8.8.8 1.1.1.1
+# EOF
 
-    cat > /etc/systemd/network/50-internal-can.network <<EOF
-# Internal CAN Bus (can0) Configuration for Talos
-[Match]
-Name=can0
+#     cat > /etc/systemd/network/50-internal-can.network <<EOF
+# # Internal CAN Bus (can0) Configuration for Talos
+# [Match]
+# Name=can0
 
-[CAN]
-BitRate=1M
-RestartSec=1s
-EOF
+# [CAN]
+# BitRate=1M
+# RestartSec=1s
+# EOF
 
-    cat > /etc/systemd/network/51-external-can.network <<EOF
-# External CAN Bus (can1) Configuration for Talos
-[Match]
-Name=can1
+#     cat > /etc/systemd/network/51-external-can.network <<EOF
+# # External CAN Bus (can1) Configuration for Talos
+# [Match]
+# Name=can1
 
-[CAN]
-BitRate=250K
-RestartSec=1s
-EOF
+# [CAN]
+# BitRate=250K
+# RestartSec=1s
+# EOF
 
-    cat > /etc/udev/rules.d/50-can-qlen.rules <<EOF
-# Configures CAN bus transmit queue length
-SUBSYSTEM=="net", ACTION=="add|change", KERNEL=="can0" ATTR{tx_queue_len}="1000"
-SUBSYSTEM=="net", ACTION=="add|change", KERNEL=="can1" ATTR{tx_queue_len}="1000"
-EOF
+#     cat > /etc/udev/rules.d/50-can-qlen.rules <<EOF
+# # Configures CAN bus transmit queue length
+# SUBSYSTEM=="net", ACTION=="add|change", KERNEL=="can0" ATTR{tx_queue_len}="1000"
+# SUBSYSTEM=="net", ACTION=="add|change", KERNEL=="can1" ATTR{tx_queue_len}="1000"
+# EOF
 
-    # Switch from NetworkManager to systemd-networkd on next reboot
-    systemctl disable NetworkManager
-    systemctl mask NetworkManager
-    systemctl unmask systemd-networkd
-    systemctl enable systemd-networkd
+    # # Switch from NetworkManager to systemd-networkd on next reboot
+    # systemctl disable NetworkManager
+    # systemctl mask NetworkManager
+    # systemctl unmask systemd-networkd
+    # systemctl enable systemd-networkd
+
+    echo "Setting static ip on remote"
+
+    # Get name of active interface in network manager
+    activeid=`nmcli --fields uuid --terse --colors no connection show --active`
+    
+    # modify connection settings to add static ip
+    nmcli connection modify $activeid ipv4.addresses $DEVICE_IP
+    nmcli connection modify $activeid ipv4.gateway 192.168.1.1
+    nmcli connection modify $activeid ipv4.dns 1.1.1.1
+
+    echo "Configuring other IO things"
 
     # add to dialout
     sudo usermod -aG dialout $USER
