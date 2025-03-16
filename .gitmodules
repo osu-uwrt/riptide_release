@@ -34,3 +34,6 @@
 [submodule "src/riptide_simulator"]
 	path = src/riptide_simulator
 	url = https://github.com/osu-uwrt/riptide_simulator
+[submodule "src/opbox_software"]
+	path = src/opbox_software
+	url = https://github.com/osu-uwrt/opbox_software
