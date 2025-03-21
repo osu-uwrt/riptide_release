@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 # Zenoh RMW Repo
 # https://github.com/ros2/rmw_zenoh

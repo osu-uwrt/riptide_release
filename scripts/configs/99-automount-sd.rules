@@ -1,0 +1,5 @@
+# Automounts SD Card on nvidia jetson orin
+ACTION=="add",
+SUBSYSTEM=="block",
+ENV{DEVLINKS}=="*/dev/disk/by-path/platform-3400000.sdhci-part1*", 
+ENV{SYSTEMD_WANTS}="mnt-sd.mount"

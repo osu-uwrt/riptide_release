@@ -1,0 +1,8 @@
+[Unit]
+Description=Mount External MicroSD part1 at /mnt/sd
+
+[Mount]
+What=/dev/disk/by-path/platform-3400000.sdhci-part1
+Where=/mnt/sd
+Type=vfat
+Options=noauto,nofail

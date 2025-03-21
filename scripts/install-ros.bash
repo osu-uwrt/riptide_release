@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 # Update and Upgrade bc why not
 sudo apt update && sudo apt -y upgrade
