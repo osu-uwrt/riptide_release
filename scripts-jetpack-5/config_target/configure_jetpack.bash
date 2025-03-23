@@ -21,8 +21,6 @@ if [ ! "$ARCH" == *"aarch64"* ]; then
     rm /var/lib/nvfancontrol/status
     systemctl start nvfancontrol
 
-    echo "Disabling desktop"
-    systemctl set-default multi-user.target
 
     echo "Configuring CAN interfaces"
     # Remove the mttcan blacklist because NVIDIA
@@ -34,19 +32,6 @@ if [ ! "$ARCH" == *"aarch64"* ]; then
 can
 can_raw
 mttcan
-EOF
-
-    # Load in systemd-networkd scripts
-    cat > /etc/systemd/network/20-wired.network <<EOF
-# Static IP configuration for ethernet port
-# Sets the IP address for this computer
-[Match]
-Name=eth0
-
-[Network]
-Address=${DEVICE_IP}/24
-Gateway=192.168.1.1
-DNS=8.8.8.8 1.1.1.1
 EOF
 
     cat > /etc/systemd/network/50-internal-can.network <<EOF
@@ -76,8 +61,6 @@ SUBSYSTEM=="net", ACTION=="add|change", KERNEL=="can1" ATTR{tx_queue_len}="1000"
 EOF
 
     # Switch from NetworkManager to systemd-networkd on next reboot
-    systemctl disable NetworkManager
-    systemctl mask NetworkManager
     systemctl unmask systemd-networkd
     systemctl enable systemd-networkd
 
