@@ -15,9 +15,9 @@ cp configs/zenoh* ~/zenoh-config
 cd ~/zenoh-config
 
 # ENV variables for RMW
-sudo sh -c "echo -n RMW_IMPLEMENTATION=rmw_zenoh_cpp >> /etc/environment"
-sudo sh -c "echo -n ZENOH_ROUTER_CONFIG_URI=$PWD/zenoh-router.json5 >> /etc/environment"
-sudo sh -c "echo -n ZENOH_SESSION_CONFIG_URI=$PWD/zenoh-session.json5 >> /etc/environment"
+sudo sh -c "echo RMW_IMPLEMENTATION=rmw_zenoh_cpp >> /etc/environment"
+sudo sh -c "echo ZENOH_ROUTER_CONFIG_URI=$PWD/zenoh-router.json5 >> /etc/environment"
+sudo sh -c "echo ZENOH_SESSION_CONFIG_URI=$PWD/zenoh-session.json5 >> /etc/environment"
 
 # Use Zenoh for discovery server
-sudo sh -c "echo -n DISCOVERY_SERVER_CMD=ros2 run rmw_zenoh_cpp rmw_zenohd >> /etc/environment"
+sudo sh -c "echo DISCOVERY_SERVER_CMD=ros2 run rmw_zenoh_cpp rmw_zenohd >> /etc/environment"
