@@ -1,0 +1,6 @@
+[Match]
+# ID_PATH udev PARAM for a device
+Path=platform-6800000.ethernet
+
+[Link]
+Name=eth0

@@ -1,0 +1,7 @@
+[Match]
+# ID_PATH udev PARAM for a device
+Path=platform-c320000.mttcan
+
+[Link]
+Name=can1
+TransmitQueueLength=1000

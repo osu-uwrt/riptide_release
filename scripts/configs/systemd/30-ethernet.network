@@ -1,0 +1,10 @@
+[Match]
+# ID_PATH udev PARAM for a device
+Path=platform-6800000.ethernet
+
+[Network]
+DHCP=yes
+
+# Address=[IP]/24
+# Gateway=1922.168.1.1
+# DNS=1.1.1.1 1.0.0.1

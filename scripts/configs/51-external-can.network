@@ -1,7 +1,0 @@
-# External CAN Bus (can1) Configuration for Talos
-[Match]
-Name=can1
-
-[CAN]
-BitRate=250K
-RestartSec=1s
