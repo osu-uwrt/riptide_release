@@ -19,3 +19,13 @@ sudo apt update
 
 # Install ROS
 sudo apt install -y ros-humble-ros-base ros-dev-tools
+
+mkdir $HOME/.riptide-config
+touch $HOME/.riptide-config/source-ros
+cat >> $HOME/.riptide-config/source-ros << EOF
+source /opt/ros/humble/setup.bash
+source $HOME/dependencies/install/setup.bash
+source $HOME/colcon_deploy/install/setup.bash
+EOF
+
+echo "source $HOME/.riptide-config/source-ros" >> $HOME/.bashrc

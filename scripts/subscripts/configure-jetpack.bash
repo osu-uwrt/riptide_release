@@ -27,3 +27,11 @@ systemctl enable systemd-networkd
 echo "192.168.1.212    uwrt-dvl" >> /tmp/hosts
 
 cp configs/systemd/mnt-sd.mount /etc/systemd/system
+
+# Install JTOP
+sudo pip3 install jetson-stats
+sudo pip3 install -U jetson-stats
+systemctl enable --now jtop.service
+
+# Set Power Mode to MAX
+sed -i.bkup -e "s/PM_CONFIG DEFAULT=2/PM_CONFIG DEFAULT=0/" /etc/nvpmodel.conf
