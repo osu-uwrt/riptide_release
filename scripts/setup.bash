@@ -8,4 +8,6 @@ bash subscripts/configure-fastdds.bash
 
 bash subscripts/install-zed-sdk.bash
 
+bash subscripts/rosdep.bash
+
 sudo reboot

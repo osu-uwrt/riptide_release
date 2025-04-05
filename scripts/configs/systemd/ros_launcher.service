@@ -1,0 +1,74 @@
+# This is the sevice file to have the ros2 remote launcher autostart on the orin
+# This is recommended as it allows the remote launcher to keep track of all child processes
+# and report if any child launches escape the shutdown and become zombies
+#
+# This file should be installed to
+#   /etc/systemd/system/ros_launcher.service
+#
+# It can be enabled with `systemctl enable ros_launcher && systemctl start ros_launcher`
+
+[Unit]
+Description=ROS2 Remote Launcher (UWRT)
+Wants=network-online.target
+After=network-online.target
+
+# Restart Rate Limiting
+# It must be constantly crashing if we restart over 5 times in 15 seconds
+StartLimitIntervalSec=15s
+StartLimitBurst=5
+
+[Service]
+# Command to launch the service
+ExecStart=/bin/bash -c 'source /home/ros/.riptide-config/source-ros; python3 /home/ros/colcon_deploy/install/remote_launch/lib/remote_launch/launcher --systemd --start-discovery-server'
+Environment="DISCOVERY_SERVER_CMD=fastdds discovery -i 0"
+Environment="ROS_DISCOVERY_SERVER=127.0.0.1"11811"
+WorkingDirectory=/home/ros
+User=ros
+Group=ros
+
+########################################
+# Service Communication
+########################################
+
+# Python script sends ready via notify socket
+Type=notify
+# Need to give all processes access at the start (since ros2 run spawns our node as a child)
+NotifyAccess=all
+
+# Send stdout/stderr to journalctl, we don't want standard in though
+StandardError=journal
+StandardOutput=journal
+StandardInput=null
+SyslogIdentifier=ros_launcher
+
+########################################
+# Startup/Shutdown Sequencing
+########################################
+
+# Wait 500ms when restarting the service, and always restart the service when process quits
+RestartSec=500ms
+Restart=always
+# Give 10 seconds for the service to start up and begin hosting the web server
+TimeoutStartSec=10s
+
+# Give 15 seconds for the service to clean up all child launches, after which it'll just kill it
+TimeoutStopSec=15s
+# Don't send kill signal, as ExecStop will do it
+KillSignal=SIGINT
+# If it takes too long to shut down, then a final SIGKILL will be sent after TimeoutStopSec
+SendSIGKILL=yes
+FinalKillSignal=SIGKILL
+
+# We should only ever exit cleanly if the main python process exits with 0
+# This overrides the default where SIGTERM/SIGINT/SIGHUP/SIGPIPE are allowed, since we need this service
+# to fully clean up all ROS nodes, and thus should only ever exit with a 0 even with KeyboardInterrupt
+SuccessExitStatus=0
+
+# When watchdog reset requested though, give 500ms for keyboard interrupt, then go in with sigkill
+WatchdogSignal=SIGINT
+TimeoutAbortSec=500ms
+
+
+[Install]
+WantedBy=multi-user.target
+
