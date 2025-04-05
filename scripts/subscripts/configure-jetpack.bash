@@ -16,6 +16,7 @@ rm /etc/systemd/network/*.network
 
 cp configs/systemd/*.link /etc/systemd/network
 cp configs/systemd/*.network /etc/systemd/network
+cp configs/systemd/*.service /etc/systemd/system
 
 # Switch from NetworkManager to systemd-networkd on next reboot
 systemctl disable NetworkManager
