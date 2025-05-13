@@ -1,0 +1,4 @@
+{
+    "name": "OSU-UWRT Devcontainer",
+    "image": "devcontainers/uwrt:latest"
+}
