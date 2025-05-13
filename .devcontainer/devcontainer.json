@@ -1,4 +1,4 @@
 {
     "name": "OSU-UWRT Devcontainer",
-    "image": "devcontainers/uwrt:latest"
+    "image": "git.erwine.dev/devcontainers/uwrt:latest"
 }
