@@ -1,4 +1,13 @@
 {
-    "name": "OSU-UWRT Devcontainer",
-    "image": "git.erwine.dev/devcontainers/uwrt:latest"
+    "name": "osu-uwrt",
+    "image": "git.erwine.dev/devcontainers/uwrt:latest",
+
+    "containerEnv": {
+      "DISPLAY": "${localEnv:DISPLAY}",
+      "VISUAL": "code --wait",
+      "EDITOR": "code --wait",
+      "GIT_EDITOR": "code --wait",
+      "CC": "/usr/bin/clang",
+      "CXX": "/usr/bin/clang++"
+    }
 }
