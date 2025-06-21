@@ -155,7 +155,7 @@
       /// (e.g. autoconnect_strategy : { peer: { to_router:  "always", to_peer: "greater-zid" } }).
       /// ROS setting: by default all peers rely on the router to discover each other. Thus configuring the peer to send gossip
       ///              messages only to the router is sufficient and avoids unecessary traffic between Nodes at launch time.
-      autoconnect_strategy: { peer: { to_router: "always", to_peer: "greater-zid" } },
+      // autoconnect_strategy: { peer: { to_router: "always", to_peer: "greater-zid" } },
       /// Whether or not to listen for scout messages on UDP multicast and reply to them.
       listen: true,
     },
@@ -196,7 +196,7 @@
       /// ROS setting: as by default all peers will interconnect to each other over the loopback interface,
       ///              they are all reachable to each other. Hence using "greater-zid" for peers connecting to
       ///              other peers is sufficient and avoids unecessary double connections between peers at startup.
-      autoconnect_strategy: { peer: { to_router: "always", to_peer: "greater-zid" } },
+      // autoconnect_strategy: { peer: { to_router: "always", to_peer: "greater-zid" } },
     },
   },
 
@@ -679,7 +679,7 @@
       /// but produces extra latency at the first SHM buffer interaction.
       /// - "init": SHM subsystem internals will be initialized upon Session opening. This setting sacrifices
       /// startup time, but guarantees no latency impact when first SHM buffer is processed.
-      mode: "lazy",
+      // mode: "lazy",
     },
     auth: {
       /// The configuration of authentication.
