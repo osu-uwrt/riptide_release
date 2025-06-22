@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    Superclient Configuration for running ros2 introspection commands
+    This file is filled out by enable_discovery_server.bash and copied to the correct location during enabling of the
+    discovery server on the host.
+-->
+
+<dds>
+    <profiles xmlns="http://www.eprosima.com/XMLSchemas/fastRTPS_Profiles">
+
+        <!-- Transport Descriptors -->
+        <transport_descriptors>
+            <!-- SHM Transport -->
+            <transport_descriptor>
+                <transport_id>shm_transport</transport_id>
+                <type>SHM</type>
+                <segment_size>134217728</segment_size> <!-- 128 MB -->
+            </transport_descriptor>
+
+            <!-- UDP Transport with larger buffers -->
+            <transport_descriptor>
+                <transport_id>udp_transport</transport_id>
+                <type>UDPv4</type>
+                <sendBufferSize>1048576</sendBufferSize>       <!-- 1 MB -->
+                <receiveBufferSize>1048576</receiveBufferSize> <!-- 1 MB -->
+            </transport_descriptor>
+        </transport_descriptors>
+
+        <!-- Participant Profile -->
+        <participant profile_name="super_client_profile" is_default_profile="true">
+            <rtps>
+                <builtin>
+                    <discovery_config>
+                        <discoveryProtocol>SUPER_CLIENT</discoveryProtocol>
+                        <discoveryServersList>
+                            <RemoteServer prefix="44.53.00.5f.45.50.52.4f.53.49.4d.41">
+                                <metatrafficUnicastLocatorList>
+                                    <locator>
+                                        <udpv4>
+                                            <address>localhost</address>
+                                            <port>11811</port>
+                                        </udpv4>
+                                    </locator>
+                                </metatrafficUnicastLocatorList>
+                            </RemoteServer>
+                        </discoveryServersList>
+                    </discovery_config>
+                </builtin>
+
+                <!-- Use custom transports: SHM + UDP -->
+                <userTransports>
+                    <transport_id>shm_transport</transport_id>
+                    <transport_id>udp_transport</transport_id>
+                </userTransports>
+                <useBuiltinTransports>false</useBuiltinTransports>
+            </rtps>
+        </participant>
+
+    </profiles>
+</dds>

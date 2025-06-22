@@ -34,7 +34,7 @@
     ///
     /// See https://docs.rs/zenoh/latest/zenoh/config/struct.EndPoint.html
     endpoints: [
-      "tcp/192.168.1.24:7447"
+      "tcp/192.168.0.27:7447"
     ],
 
     /// Global connect configuration,
@@ -148,7 +148,7 @@
       /// (e.g. autoconnect_strategy : { to_router:  "always", to_peer: "greater-zid" }),
       /// or different values for router or peer mode
       /// (e.g. autoconnect_strategy : { peer: { to_router:  "always", to_peer: "greater-zid" } }).
-      // autoconnect_strategy: { router: { to_router: "always", to_peer: "always" } },
+      autoconnect_strategy: { router: { to_router: "always", to_peer: "always" } },
       /// Whether or not to listen for scout messages on UDP multicast and reply to them.
       listen: true,
     },
@@ -186,7 +186,7 @@
       /// (e.g. autoconnect_strategy : { to_router:  "always", to_peer: "greater-zid" }),
       /// or different values for router or peer mode
       /// (e.g. autoconnect_strategy : { peer: { to_router:  "always", to_peer: "greater-zid" } }).
-      // autoconnect_strategy: { router: { to_router: "always", to_peer: "always" } },
+      autoconnect_strategy: { router: { to_router: "always", to_peer: "always" } },
     },
   },
 
@@ -672,7 +672,7 @@
       /// but produces extra latency at the first SHM buffer interaction.
       /// - "init": SHM subsystem internals will be initialized upon Session opening. This setting sacrifices
       /// startup time, but guarantees no latency impact when first SHM buffer is processed.
-      // mode: "lazy",
+      mode: "lazy",
     },
     auth: {
       /// The configuration of authentication.

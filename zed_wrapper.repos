@@ -1,0 +1,55 @@
+repositories:
+  backward_ros:
+    type: git
+    url: https://github.com/pal-robotics/backward_ros/
+    version: 7d1942aa8e5a597dccf67bc41624db9dccd03e40
+
+  ffmpeg_image_transport:
+    type: git
+    url: https://github.com/ros-misc-utilities/ffmpeg_image_transport/
+    version: 4aaf47ef44aed9ed2cea6739bf7937c10e3bd4fe
+  
+  image_transport_plugins:
+    type: git
+    url: https://github.com/ros-perception/image_transport_plugins/
+    version: 7e480ae2b347977074ac8731fa1b09da47c7d21e
+  
+  point_cloud_transport:
+    type: git
+    url: https://github.com/ros-perception/point_cloud_transport/
+    version: 5a9eafa47c722a9cb55806fae259d5507fef0dcb
+  
+  vision_opencv:
+    type: git
+    url: https://github.com/ros-perception/vision_opencv/
+    version: 9800f67cea477c44cfb64e349854bcb6a09dc9ce
+
+  zed-ros2-wrapper:
+    type: git
+    url: https://github.com/stereolabs/zed-ros2-wrapper/
+    version: 7f42463279bf1e8b7c77a9a33df35823a535130b
+  
+  ffmpeg_encoder_decoder:
+    type: git
+    url: https://github.com/ros-misc-utilities/ffmpeg_encoder_decoder/
+    version: f044c8d7ab497ddb0cecdc96f074db8d01e9eab0
+
+  ffmpeg_image_transport_msgs:
+    type: git
+    url: https://github.com/ros-misc-utilities/ffmpeg_image_transport_msgs
+    version: 5395eac7dd830245c29d13c4db9fac1574137014
+  
+  nmea_msgs:
+    type: git
+    url: https://github.com/ros-drivers/nmea_msgs/
+    version: b57ff6364bde239c78f6e2ab89727ca8c0fbc1f0
+  
+  point_cloud_transport_plugins:
+    type: git
+    url: https://github.com/ros-perception/point_cloud_transport_plugins
+    version: f5005add81c3af44b33f884a7c99f87d407d70c7
+
+  zed-ros2-interfaces:
+    type: git
+    url: https://github.com/stereolabs/zed-ros2-interfaces/
+    version: 00f5e290d52a81110d86da9f7910dd8867d24f56
