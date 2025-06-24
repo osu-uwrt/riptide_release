@@ -1,6 +1,6 @@
 {
     "name": "osu-uwrt",
-    "image": "git.erwine.dev/devcontainers/uwrt:latest",
+    "image": "docker.io/library/ros:humble",
 
     "containerEnv": {
       "DISPLAY": "${localEnv:DISPLAY}",
