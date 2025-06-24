@@ -6,5 +6,7 @@
       "DISPLAY": "${localEnv:DISPLAY}",
       "CC": "/usr/bin/clang",
       "CXX": "/usr/bin/clang++"
-    }
+    },
+
+    "remoteUser": "root"
 }
