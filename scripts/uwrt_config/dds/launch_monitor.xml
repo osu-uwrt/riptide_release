@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds>
+  <profiles xmlns="http://www.eprosima.com/XMLSchemas/fastRTPS_Profiles">
+
+    <!-- only UDP → no SHM at all -->
+    <transport_descriptors>
+      <transport_descriptor>
+        <transport_id>udp_transport</transport_id>
+        <type>UDPv4</type>
+        <sendBufferSize>1048576</sendBufferSize>
+        <receiveBufferSize>1048576</receiveBufferSize>
+      </transport_descriptor>
+    </transport_descriptors>
+
+    <!-- Super‑Client discovery + UDP transport only -->
+    <participant profile_name="monitor_profile" is_default_profile="true">
+      <rtps>
+        <builtin>
+          <discovery_config>
+            <discoveryProtocol>SUPER_CLIENT</discoveryProtocol>
+            <discoveryServersList>
+              <RemoteServer prefix="44.53.00.5f.45.50.52.4f.53.49.4d.41">
+                <metatrafficUnicastLocatorList>
+                  <locator>
+                    <udpv4>
+                      <address>localhost</address>
+                      <port>11811</port>
+                    </udpv4>
+                  </locator>
+                </metatrafficUnicastLocatorList>
+              </RemoteServer>
+            </discoveryServersList>
+          </discovery_config>
+        </builtin>
+
+        <!-- disable all built‑in transports (which include SHM) -->
+        <useBuiltinTransports>false</useBuiltinTransports>
+        <!-- only our UDP descriptor -->
+        <userTransports>
+          <transport_id>udp_transport</transport_id>
+        </userTransports>
+      </rtps>
+    </participant>
+
+  </profiles>
+</dds>

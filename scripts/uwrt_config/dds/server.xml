@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dds xmlns="http://www.eprosima.com">
+    <profiles>
+
+        <!-- Transport Descriptors -->
+        <transport_descriptors>
+            <!-- SHM -->
+            <transport_descriptor>
+                <transport_id>shm_transport</transport_id>
+                <type>SHM</type>
+                <segment_size>134217728</segment_size> <!-- 128 MB -->
+            </transport_descriptor>
+
+            <!-- UDP -->
+            <transport_descriptor>
+                <transport_id>udp_transport</transport_id>
+                <type>UDPv4</type>
+                <sendBufferSize>1048576</sendBufferSize>
+                <receiveBufferSize>1048576</receiveBufferSize>
+            </transport_descriptor>
+        </transport_descriptors>
+
+        <!-- Participant -->
+        <participant profile_name="participant_discovery_protocol" is_default_profile="true">
+            <rtps>
+                <builtin>
+                    <discovery_config>
+                        <discoveryProtocol>SERVER</discoveryProtocol>
+                        <!-- Add peer servers here if meshing -->
+                    </discovery_config>
+
+                    <!-- Where discovery traffic will be sent/received -->
+                    <metatrafficUnicastLocatorList>
+                        <locator>
+                            <udpv4>
+                                <address>0.0.0.0</address>
+                                <port>11811</port>
+                            </udpv4>
+                            <tcpv4>
+                                <address>0.0.0.0</address>
+                                <port>42100</port>
+                            </tcpv4>
+                        </locator>
+                    </metatrafficUnicastLocatorList>
+                </builtin>
+
+                <!-- Use both SHM + UDP -->
+                <userTransports>
+                    <transport_id>shm_transport</transport_id>
+                    <transport_id>udp_transport</transport_id>
+                </userTransports>
+                <useBuiltinTransports>false</useBuiltinTransports>
+            </rtps>
+        </participant>
+
+    </profiles>
+</dds>
