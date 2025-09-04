@@ -2,11 +2,14 @@
     "name": "osu-uwrt",
     "image": "docker.io/library/ros:humble",
 
+    "privileged": true,
     "containerEnv": {
       "DISPLAY": "${localEnv:DISPLAY}",
       "CC": "/usr/bin/clang",
       "CXX": "/usr/bin/clang++"
     },
+
+    "postStartCommand": "bash /workspaces/riptide_release/.devcontainer/configure.bash",
 
     "remoteUser": "root"
 }
