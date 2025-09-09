@@ -1,15 +1,23 @@
 {
     "name": "osu-uwrt",
-    "image": "docker.io/library/ros:humble",
+
+    "image": "ros:humble",
 
     "privileged": true,
+
+    "overrideCommand": true,
+
     "containerEnv": {
       "DISPLAY": "${localEnv:DISPLAY}",
-      "CC": "/usr/bin/clang",
-      "CXX": "/usr/bin/clang++"
+      "CC": "/usr/bin/clang-20",
+      "CXX": "/usr/bin/clang-cpp-20"
     },
 
-    "postStartCommand": "bash /workspaces/riptide_release/.devcontainer/configure.bash",
+    "mounts": [
+        "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind,consistency=cached"
+    ],
+
+    "onCreateCommand": "/bin/bash -c 'bash /workspaces/riptide_release/.devcontainer/configure.bash'",
 
     "remoteUser": "root"
 }
