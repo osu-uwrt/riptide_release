@@ -9,15 +9,15 @@
 
     "containerEnv": {
       "DISPLAY": "${localEnv:DISPLAY}",
-      "CC": "/usr/bin/clang-20",
-      "CXX": "/usr/bin/clang-cpp-20"
+      "CC": "/usr/bin/clang",
+      "CXX": "/usr/bin/clang++"
     },
 
     "mounts": [
         "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind,consistency=cached"
     ],
 
-    "onCreateCommand": "/bin/bash -c 'bash /workspaces/riptide_release/.devcontainer/configure.bash'",
+    "postStartCommand": "/bin/bash ./.devcontainer/configure.bash",
 
     "remoteUser": "root"
 }

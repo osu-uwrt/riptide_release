@@ -1,19 +1,16 @@
 #!/bin/bash
 
 echo Configuring Workspace
-
-cd /wokspaces/riptide_release
+wd=${PWD}
 
 if [[ ! -e ~/.configured ]]; then
 
-
-
     # Add this file to bashc
-    echo "source /workspaces/riptide_release/.devcontainer/setup.bash" >> ~/.bashrc
+    echo "source ${wd}/.devcontainer/setup.bash" >> ~/.bashrc
 
 
     # Init & Pull Submodules
-    git submodule init
+    git submodule update --init
     git pull --recurse-submodules
 
     # Update Packages
@@ -23,7 +20,7 @@ if [[ ! -e ~/.configured ]]; then
     apt install -y clang clangd
 
     # Install Deps
-    sudo rosdep install -iry --from-paths /workspaces/riptide_release/src
+    rosdep install -iry --rosdistro humble --from-paths ${wd}/src
 
     touch ~/.configured
 fi
