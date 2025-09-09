@@ -20,11 +20,7 @@ if [[ ! -e ~/.configured ]]; then
     sudo apt update && sudo apt upgrade -y
 
     # Install Clang
-    apt install -y lsb-release wget software-properties-common gnupg
-    bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
-
-    # Apiltag ROS breaks rosdep
-    rm -r /workspaces/riptide_release/src/apriltag_ros
+    apt install -y clang clangd
 
     # Install Deps
     sudo rosdep install -iry --from-paths /workspaces/riptide_release/src
