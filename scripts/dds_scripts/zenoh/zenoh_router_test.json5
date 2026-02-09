@@ -2,7 +2,7 @@
   mode: "client",
   connect: {
     timeout_ms: { router: -1, peer: -1, client: 0 },
-    endpoints: ["tcp/orin2:7447"],
+    endpoints: ["tcp/orin2:7447", "tcp/nano:7447"],
     retry: {
       period_init_ms: 1000,
       period_max_ms: 4000,

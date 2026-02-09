@@ -1,0 +1,12 @@
+{
+  mode: "client",
+  connect: {
+    endpoints: ["tcp/orin2:7447"],
+    timeout_ms: { router: -1, peer: 0, client: 0 },
+    retry: {
+      period_init_ms: 500,
+      period_max_ms: 5000,
+      period_increase_factor: 2
+    }
+  }
+}
