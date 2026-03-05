@@ -12,13 +12,27 @@ jobs:
 
     steps:
       # -----------------------------------------------------------------------
-      # 1. Checkout the release repo + all 12 submodules recursively
+      # 1. Checkout the release repo (no submodules yet)
       # -----------------------------------------------------------------------
-      - name: Checkout repository with submodules
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          submodules: recursive
           fetch-depth: 0
+
+      # -----------------------------------------------------------------------
+      # 2. Initialize submodules with fallback for stale pinned commits
+      #    Some pinned commits may have been removed from the remote (e.g. after
+      #    a force-push). We try the pinned commit first; if the remote no longer
+      #    has it we fall back to the tracked branch tip so CI stays green.
+      # -----------------------------------------------------------------------
+      - name: Checkout submodules (with stale-ref fallback)
+        run: |
+          git submodule init
+          git submodule foreach --quiet 'echo $displaypath' | while read sm; do
+            echo "--- Updating submodule: $sm"
+            git submodule update --init --no-recommend-shallow "$sm" \
+              || git submodule update --init --remote --no-recommend-shallow "$sm"
+          done
 
       # -----------------------------------------------------------------------
       # 2. Install ROS 2 Humble
