@@ -11,20 +11,13 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      # -----------------------------------------------------------------------
-      # 1. Checkout the release repo (no submodules yet)
-      # -----------------------------------------------------------------------
+      
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # -----------------------------------------------------------------------
-      # 2. Initialize submodules with fallback for stale pinned commits
-      #    Some pinned commits may have been removed from the remote (e.g. after
-      #    a force-push). We try the pinned commit first; if the remote no longer
-      #    has it we fall back to the tracked branch tip so CI stays green.
-      # -----------------------------------------------------------------------
+     
       - name: Checkout submodules (with stale-ref fallback)
         run: |
           git submodule init
@@ -34,18 +27,13 @@ jobs:
               || git submodule update --init --remote --no-recommend-shallow "$sm"
           done
 
-      # -----------------------------------------------------------------------
-      # 2. Install ROS 2 Humble
-      # -----------------------------------------------------------------------
+ 
       - name: Setup ROS 2 Humble
         uses: ros-tooling/setup-ros@v0.7
         with:
           required-ros-distributions: humble
 
-      # -----------------------------------------------------------------------
-      # 3. System dependencies not covered by rosdep
-      #    (hardware drivers, serial libs, Qt5 for RViz plugins, etc.)
-      # -----------------------------------------------------------------------
+   
       - name: Install extra system dependencies
         run: |
           sudo apt-get update
@@ -58,9 +46,6 @@ jobs:
             qtbase5-dev \
             qtbase5-dev-tools
 
-      # -----------------------------------------------------------------------
-      # 4. Install all ROS dep from every package in src/
-      # -----------------------------------------------------------------------
       - name: Install ROS dependencies via rosdep
         run: |
           sudo rosdep init || true
@@ -71,10 +56,6 @@ jobs:
             --rosdistro humble \
             -r -y
 
-      # -----------------------------------------------------------------------
-      # 5. Build the full workspace
-      #    - tensor_detector  skipped: requires CUDA/GPU (not on GH runners)
-      # -----------------------------------------------------------------------
       - name: Build workspace with colcon
         run: |
           source /opt/ros/humble/setup.bash
@@ -83,9 +64,7 @@ jobs:
             --cmake-args -DCMAKE_BUILD_TYPE=Release \
             --event-handlers console_cohesion+
 
-      # -----------------------------------------------------------------------
-      # 6. Upload build logs on failure for easy diagnosis
-      # -----------------------------------------------------------------------
+  
       - name: Upload build logs on failure
         if: failure()
         uses: actions/upload-artifact@v4
