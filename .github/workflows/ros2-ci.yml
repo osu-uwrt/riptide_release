@@ -1,0 +1,76 @@
+name: ROS 2 Full Stack CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+      
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+     
+      - name: Checkout submodules (with stale-ref fallback)
+        run: |
+          git submodule init
+          git submodule foreach --quiet 'echo $displaypath' | while read sm; do
+            echo "--- Updating submodule: $sm"
+            git submodule update --init --no-recommend-shallow "$sm" \
+              || git submodule update --init --remote --no-recommend-shallow "$sm"
+          done
+
+ 
+      - name: Setup ROS 2 Humble
+        uses: ros-tooling/setup-ros@v0.7
+        with:
+          required-ros-distributions: humble
+
+   
+      - name: Install extra system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libusb-1.0-0-dev \
+            libserial-dev \
+            python3-vcstool \
+            python3-colcon-common-extensions \
+            libqt5widgets5 \
+            qtbase5-dev \
+            qtbase5-dev-tools
+
+      - name: Install ROS dependencies via rosdep
+        run: |
+          sudo rosdep init || true
+          rosdep update
+          rosdep install \
+            --from-paths src \
+            --ignore-src \
+            --rosdistro humble \
+            -r -y
+
+      - name: Build workspace with colcon
+        run: |
+          source /opt/ros/humble/setup.bash
+          colcon build \
+            --packages-skip tensor_detector \
+            --cmake-args -DCMAKE_BUILD_TYPE=Release \
+            --event-handlers console_cohesion+
+
+  
+      - name: Upload build logs on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-logs
+          path: |
+            log/
+            build/*/stderr.log
+          retention-days: 7
