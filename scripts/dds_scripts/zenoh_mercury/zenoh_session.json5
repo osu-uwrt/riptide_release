@@ -1,0 +1,8 @@
+{
+  mode: "client",
+  connect: {
+    endpoints: [
+      "tcp/nano:7447"
+    ],
+  }
+}
