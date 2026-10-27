@@ -37,3 +37,7 @@
 [submodule "src/opbox_software"]
 	path = src/opbox_software
 	url = https://github.com/osu-uwrt/opbox_software
+[submodule "nereus"]
+	path = nereus
+	url = https://github.com/osu-uwrt/nereus
+	ignore = untracked
