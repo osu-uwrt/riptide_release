@@ -37,3 +37,6 @@
 [submodule "src/opbox_software"]
 	path = src/opbox_software
 	url = https://github.com/osu-uwrt/opbox_software
+[submodule "src/riptide_simulink"]
+	path = src/riptide_simulink
+	url = git@github.com:osu-uwrt/riptide_simulink.git
