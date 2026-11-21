@@ -40,3 +40,7 @@
 [submodule "src/riptide_simulink"]
 	path = src/riptide_simulink
 	url = git@github.com:osu-uwrt/riptide_simulink.git
+[submodule "nereus"]
+	path = nereus
+	url = https://github.com/osu-uwrt/nereus
+	ignore = untracked
